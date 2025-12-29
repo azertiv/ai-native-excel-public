@@ -48,9 +48,15 @@
             </div>
           </div>
 
-          <div class="card__alert section-alert section-alert--error is-hidden" data-key-alert role="alert">
-            Aucune clé API enregistrée. Ajoutez au moins une clé pour activer les fonctions IA.
-          </div>
+          <button
+            class="card__alert section-alert section-alert--error section-alert--action is-hidden"
+            data-key-alert
+            type="button"
+            role="alert"
+            title="Cliquez pour ajouter vos clés API"
+          >
+            Aucune clé API enregistrée. Cliquez ici pour ajouter vos clés.
+          </button>
 
           <div id="configBody" class="card__body">
             <div class="config-grid">
@@ -60,7 +66,7 @@
                   <span class="help" data-help>
                     <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide fournisseur par défaut" aria-expanded="false">?</button>
                     <span class="help__popup" role="tooltip">
-                      Détermine le fournisseur utilisé par défaut dans les formules AI.*.
+                      Définit le fournisseur utilisé par défaut dans les formules AI.* (modifiable sans changer vos formules).
                     </span>
                   </span>
                 </div>
@@ -81,17 +87,17 @@
                   <span class="help" data-help>
                     <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide max tokens" aria-expanded="false">?</button>
                     <span class="help__popup" role="tooltip">
-                      Limite la longueur des réponses et s'applique aux deux fournisseurs.
+                      Limite la longueur des réponses pour Gemini et OpenAI. Plus haut = réponses plus longues, coût et latence plus élevés.
                     </span>
                   </span>
                 </div>
                 <div class="range">
-                  <input id="maxTokensRange" class="range__input" type="range" min="7" max="17" step="1" />
+                  <input id="maxTokensRange" class="range__input" type="range" min="7" max="17" step="1" value="12" />
                   <div class="range__value">
-                    <span id="maxTokensValue">1024</span> tokens
+                    <span id="maxTokensValue">4096</span> tokens
                   </div>
                 </div>
-                <div class="hint">Conseil : 256–2048 pour la plupart des usages. Plus = réponses plus longues.</div>
+                <div class="hint">Conseil : 512–4096 pour la plupart des usages. Plus = réponses plus longues.</div>
               </div>
             </div>
 
@@ -124,12 +130,44 @@
                       <span class="help" data-help>
                         <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide modèle Gemini" aria-expanded="false">?</button>
                         <span class="help__popup" role="tooltip">
-                          Choisissez le modèle exact. $ = coût, &#129504; = raisonnement.
+                          Choisissez le modèle Gemini : certains sont plus rapides, d'autres plus précis. $ = coût, &#129504; = raisonnement.
                         </span>
                       </span>
                     </div>
                     <select id="geminiModel" class="input input--select"></select>
                     <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion.</div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="label-row">
+                      <label for="geminiReasoningEffort">Effort de raisonnement</label>
+                      <span class="help" data-help>
+                        <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide effort de raisonnement Gemini" aria-expanded="false">?</button>
+                        <span class="help__popup" role="tooltip">
+                          Auto = comportement par défaut. Gemini 3 utilise thinkingLevel, Gemini 2.5 utilise thinkingBudget.
+                        </span>
+                      </span>
+                    </div>
+                    <div class="reasoning">
+                      <div class="reasoning__control">
+                        <input id="geminiReasoningEffort" class="reasoning__input" type="range" min="0" max="4" step="1" />
+                        <div class="reasoning__track" aria-hidden="true">
+                          <span class="reasoning__dot" data-value="auto"></span>
+                          <span class="reasoning__dot" data-value="minimal"></span>
+                          <span class="reasoning__dot" data-value="low"></span>
+                          <span class="reasoning__dot" data-value="medium"></span>
+                          <span class="reasoning__dot" data-value="high"></span>
+                        </div>
+                      </div>
+                      <div class="reasoning__labels" aria-hidden="true">
+                        <span data-value="auto">auto</span>
+                        <span data-value="minimal">minimal</span>
+                        <span data-value="low">low</span>
+                        <span data-value="medium">medium</span>
+                        <span data-value="high">high</span>
+                      </div>
+                    </div>
+                    <div class="hint">Les niveaux exacts dépendent du modèle (certains sont ajustés automatiquement).</div>
                   </div>
 
               <div class="form-row">
@@ -138,7 +176,7 @@
                   <span class="help" data-help>
                     <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé Gemini" aria-expanded="false">?</button>
                     <span class="help__popup" role="tooltip">
-                      Requise pour appeler l'API Gemini. Stockée localement sur cette machine.
+                      Clé requise pour appeler Gemini. À créer dans votre console Google, stockée localement sur cette machine.
                     </span>
                   </span>
                 </div>
@@ -160,7 +198,7 @@
                       <span class="help" data-help>
                         <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide modèle OpenAI" aria-expanded="false">?</button>
                         <span class="help__popup" role="tooltip">
-                          Choisissez le modèle exact. $ = coût, &#129504; = raisonnement.
+                          Choisissez le modèle OpenAI : impact direct sur le coût et la qualité. $ = coût, &#129504; = raisonnement.
                         </span>
                       </span>
                     </div>
@@ -173,7 +211,7 @@
                       <span class="help" data-help>
                         <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide effort de raisonnement" aria-expanded="false">?</button>
                         <span class="help__popup" role="tooltip">
-                          Plus l'effort est élevé, plus la réponse est lente et peut coûter plus de tokens.
+                          Ajuste la profondeur de raisonnement pour OpenAI. Plus élevé = réponses plus détaillées mais plus lentes et coûteuses. Certains modèles n'acceptent pas "none".
                         </span>
                       </span>
                     </div>
@@ -205,7 +243,7 @@
                   <span class="help" data-help>
                     <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé OpenAI" aria-expanded="false">?</button>
                     <span class="help__popup" role="tooltip">
-                      Requise pour appeler l'API OpenAI. Stockée localement sur cette machine.
+                      Clé requise pour appeler OpenAI. À créer sur platform.openai.com, stockée localement sur cette machine.
                     </span>
                   </span>
                 </div>
@@ -240,12 +278,6 @@
               <div class="card__subtitle">Suivez les tokens et les coûts estimés par fournisseur.</div>
             </div>
             <div class="card__actions">
-              <span class="help" data-help>
-                <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide utilisation" aria-expanded="false">?</button>
-                <span class="help__popup" role="tooltip">
-                  Résumé des tokens consommés et des coûts estimés sur vos appels IA.
-                </span>
-              </span>
               <button
                 class="collapse-toggle"
                 type="button"
@@ -259,37 +291,17 @@
             </div>
           </div>
 
-          <div class="card__alert section-alert section-alert--error is-hidden" data-key-alert role="alert">
-            Aucune clé API enregistrée. Ajoutez au moins une clé pour activer les fonctions IA.
-          </div>
-
           <div id="usageBody" class="card__body">
             <div class="stats-grid">
               <div class="stat">
-                <div class="stat__label-row">
-                  <div class="stat__label">Tokens totaux</div>
-                  <span class="help" data-help>
-                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide tokens totaux" aria-expanded="false">?</button>
-                    <span class="help__popup" role="tooltip">
-                      Total des tokens envoyés, reçus et de raisonnement.
-                    </span>
-                  </span>
-                </div>
+                <div class="stat__label">Tokens totaux</div>
                 <div id="usageTokensTotal" class="stat__value">0</div>
                 <div class="stat__meta">
                   <span id="usageTokensInTotal">0</span> entrée · <span id="usageTokensReasoningTotal">0</span> raisonnement · <span id="usageTokensOutTotal">0</span> sortie
                 </div>
               </div>
               <div class="stat stat--accent">
-                <div class="stat__label-row">
-                  <div class="stat__label">Coût estimé total</div>
-                  <span class="help" data-help>
-                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide coût estimé" aria-expanded="false">?</button>
-                    <span class="help__popup" role="tooltip">
-                      Estimation basée sur les tarifs par modèle et les tokens consommés.
-                    </span>
-                  </span>
-                </div>
+                <div class="stat__label">Coût estimé total</div>
                 <div id="usageCostTotal" class="stat__value">€0.0000</div>
                 <div class="stat__meta">
                   Gemini <span id="usageCostGemini">€0.0000</span> · OpenAI <span id="usageCostOpenAI">€0.0000</span>
@@ -303,15 +315,7 @@
 
             <div class="chart">
               <div class="chart__header">
-                <div class="chart__title-row">
-                  <div class="chart__title">Activité sur 60 minutes</div>
-                  <span class="help" data-help>
-                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide activité" aria-expanded="false">?</button>
-                    <span class="help__popup" role="tooltip">
-                      Volume de tokens traités minute par minute sur la dernière heure.
-                    </span>
-                  </span>
-                </div>
+                <div class="chart__title">Activité sur 60 minutes</div>
                 <div class="chart__legend">Tokens (entrée + raisonnement + sortie)</div>
               </div>
               <canvas id="usageChart" class="chart__canvas" aria-label="Graphique d'utilisation dernière heure"></canvas>
@@ -322,16 +326,10 @@
         <section class="card card--logs is-collapsed" data-collapsible>
           <div class="card__header">
             <div>
-              <div class="card__title">Logs</div>
+            <div class="card__title">Logs</div>
               <div class="card__subtitle">Consultez l'historique des appels et erreurs récentes.</div>
             </div>
             <div class="card__actions">
-              <span class="help" data-help>
-                <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide logs" aria-expanded="false">?</button>
-                <span class="help__popup" role="tooltip">
-                  Liste des requêtes récentes, avec durée, tokens et messages d'erreur.
-                </span>
-              </span>
               <button id="clearLogs" class="btn btn--ghost" type="button">Effacer</button>
               <button
                 class="collapse-toggle"
@@ -344,10 +342,6 @@
                 <span class="chevron"></span>
               </button>
             </div>
-          </div>
-
-          <div class="card__alert section-alert section-alert--error is-hidden" data-key-alert role="alert">
-            Aucune clé API enregistrée. Ajoutez au moins une clé pour activer les fonctions IA.
           </div>
 
           <div id="logsBody" class="card__body">
@@ -365,12 +359,6 @@
             </div>
             <div class="card__actions">
               <div id="cacheStatus" class="chip chip--success">Actif</div>
-              <span class="help" data-help>
-                <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide cache" aria-expanded="false">?</button>
-                <span class="help__popup" role="tooltip">
-                  Le cache évite des appels répétitifs en réutilisant des réponses récentes.
-                </span>
-              </span>
               <button
                 class="collapse-toggle"
                 type="button"
@@ -382,10 +370,6 @@
                 <span class="chevron"></span>
               </button>
             </div>
-          </div>
-
-          <div class="card__alert section-alert section-alert--error is-hidden" data-key-alert role="alert">
-            Aucune clé API enregistrée. Ajoutez au moins une clé pour activer les fonctions IA.
           </div>
 
           <div id="cacheBody" class="card__body">
@@ -418,12 +402,6 @@
               <div class="card__subtitle">Retrouvez les fonctions prêtes à l'emploi dans Excel.</div>
             </div>
             <div class="card__actions">
-              <span class="help" data-help>
-                <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide fonctions" aria-expanded="false">?</button>
-                <span class="help__popup" role="tooltip">
-                  Copiez ces fonctions dans Excel pour lancer des appels IA.
-                </span>
-              </span>
               <button
                 class="collapse-toggle"
                 type="button"
@@ -435,10 +413,6 @@
                 <span class="chevron"></span>
               </button>
             </div>
-          </div>
-
-          <div class="card__alert section-alert section-alert--error is-hidden" data-key-alert role="alert">
-            Aucune clé API enregistrée. Ajoutez au moins une clé pour activer les fonctions IA.
           </div>
 
           <div id="functionsBody" class="card__body">

@@ -116,7 +116,7 @@ body {
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow);
-  overflow: hidden;
+  overflow: visible;
   animation: fadeUp 0.5s ease both;
 }
 
@@ -247,9 +247,10 @@ body {
 .help__popup {
   position: absolute;
   top: calc(100% + 6px);
-  right: 0;
-  min-width: 180px;
-  max-width: 240px;
+  left: 0;
+  right: auto;
+  min-width: 200px;
+  max-width: min(280px, 90vw);
   padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -262,7 +263,8 @@ body {
   pointer-events: none;
   transform: translateY(-4px);
   transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 5;
+  transform-origin: top left;
+  z-index: 20;
 }
 
 .help.is-open .help__popup,
@@ -303,9 +305,7 @@ body {
   grid-column: 1 / -1;
 }
 
-.label-row,
-.stat__label-row,
-.chart__title-row {
+.label-row {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -569,6 +569,20 @@ body {
   color: #b03524;
   font-size: 12px;
   font-weight: 600;
+}
+
+.section-alert--action {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  font: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-alert--action:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
 }
 
 .subsection__header {
