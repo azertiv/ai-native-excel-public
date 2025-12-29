@@ -654,6 +654,50 @@ body {
   box-shadow: var(--shadow-soft);
 }
 
+.card--license {
+  border-style: dashed;
+  background: linear-gradient(135deg, rgba(231, 111, 81, 0.12), rgba(255, 255, 255, 0.96));
+}
+
+.card--license::before {
+  background: linear-gradient(140deg, rgba(231, 111, 81, 0.18), transparent 55%);
+}
+
+.license-banner__body {
+  gap: 8px;
+}
+
+.license-banner__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.license-banner__input {
+  flex: 1 1 210px;
+  min-width: 0;
+}
+
+.license-banner__footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.license-banner__footer a {
+  color: var(--accent-2);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.license-banner__footer a:hover {
+  text-decoration: underline;
+}
+
 .subsection__header {
   width: 100%;
   display: flex;

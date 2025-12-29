@@ -43,6 +43,34 @@
         >
           Aucune clé API enregistrée · Cliquez ici pour ajouter vos clés
         </button>
+        <section id="licenseBanner" class="card card--license is-hidden" aria-live="polite">
+          <div class="card__header">
+            <div>
+              <div class="card__title">Activer votre licence</div>
+              <div class="card__subtitle">Entrez votre clé Lemon Squeezy (mensuel ou annuel)</div>
+            </div>
+          </div>
+          <div class="card__body license-banner__body">
+            <div class="license-banner__row">
+              <input
+                id="licenseBannerInput"
+                class="input license-banner__input"
+                type="text"
+                placeholder="AAAA-BBBB-CCCC-DDDD"
+                aria-label="Clé de licence"
+                spellcheck="false"
+              />
+              <button id="licenseBannerActivate" class="btn btn--primary" type="button">Activer</button>
+            </div>
+            <div id="licenseBannerStatus" class="key-status key-status--missing">Aucune licence enregistrée</div>
+            <div class="license-banner__footer">
+              <span>Pas encore de licence ?</span>
+              <a id="licenseCheckoutLinkBanner" href="https://neurow.lemonsqueezy.com/buy/..." target="_blank" rel="noreferrer">
+                Souscrire
+              </a>
+            </div>
+          </div>
+        </section>
         <section class="card card--config is-collapsed" data-collapsible data-section="config" data-section-title="Configuration" data-section-locked="true">
           <div class="card__header">
             <div>
@@ -535,6 +563,35 @@
                 <button id="clearOpenAI" class="btn" type="button">Effacer</button>
                 <button id="testOpenAI" class="btn" type="button">Tester</button>
               </div>
+            </div>
+          </div>
+
+          <div class="settings-block">
+            <div class="settings-block__title">Licence</div>
+            <div class="form-row">
+              <div class="label-row">
+                <label for="licenseKeyInput">Clé de licence</label>
+                <span class="help" data-help>
+                  <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé de licence" aria-expanded="false">?</button>
+                  <span class="help__popup" role="tooltip">
+                    Clé reçue par email après achat Lemon Squeezy · Mensuel ou annuel
+                  </span>
+                </span>
+              </div>
+              <input id="licenseKeyInput" class="input" type="text" placeholder="AAAA-BBBB-CCCC-DDDD" spellcheck="false" />
+              <div id="licenseKeyStatus" class="key-status">Aucune licence enregistrée</div>
+              <div id="licenseKeyMeta" class="hint">Clé reçue par email après achat (mensuel ou annuel)</div>
+            </div>
+            <div class="actions">
+              <button id="licenseActivateBtn" class="btn btn--primary" type="button">Activer</button>
+              <button id="licenseTestBtn" class="btn" type="button">Tester</button>
+              <button id="licenseClearBtn" class="btn btn--ghost" type="button">Effacer</button>
+            </div>
+            <div class="hint">
+              Pas encore de licence ?
+              <a id="licenseCheckoutLinkSettings" href="https://neurow.lemonsqueezy.com/buy/..." target="_blank" rel="noreferrer">
+                Souscrire
+              </a>
             </div>
           </div>
 
