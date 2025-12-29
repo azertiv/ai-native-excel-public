@@ -185,6 +185,10 @@ body {
   display: none;
 }
 
+.is-hidden {
+  display: none !important;
+}
+
 .collapse-toggle {
   width: 26px;
   height: 26px;
@@ -221,10 +225,52 @@ body {
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
+.icon-button--tiny {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
 .icon-button:hover {
   border-color: rgba(42, 157, 143, 0.4);
   box-shadow: var(--shadow-soft);
   transform: translateY(-1px);
+}
+
+.help {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.help__popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 180px;
+  max-width: 240px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.35;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 5;
+}
+
+.help.is-open .help__popup,
+.help:hover .help__popup,
+.help:focus-within .help__popup {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .chevron {
@@ -244,12 +290,30 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
+  align-items: start;
 }
 
 .form-row {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.form-row--full {
+  grid-column: 1 / -1;
+}
+
+.label-row,
+.stat__label-row,
+.chart__title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.label-row label {
+  margin: 0;
 }
 
 .form-row label {
@@ -376,6 +440,7 @@ body {
 }
 
 .reasoning {
+  --reasoning-thumb: 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -404,8 +469,8 @@ body {
 
 .reasoning__input::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
+  width: var(--reasoning-thumb);
+  height: var(--reasoning-thumb);
   border-radius: 50%;
   background: #fff;
   border: 2px solid var(--accent-2);
@@ -420,8 +485,8 @@ body {
 }
 
 .reasoning__input::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: var(--reasoning-thumb);
+  height: var(--reasoning-thumb);
   border-radius: 50%;
   background: #fff;
   border: 2px solid var(--accent-2);
@@ -431,10 +496,11 @@ body {
 .reasoning__track {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   pointer-events: none;
+  padding: 0 calc(var(--reasoning-thumb) / 2);
 }
 
 .reasoning__track::before {
@@ -454,13 +520,13 @@ body {
   height: 6px;
   border-radius: 50%;
   background: var(--accent-3);
-  justify-self: center;
   z-index: 1;
 }
 
 .reasoning__labels {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 calc(var(--reasoning-thumb) / 2);
   font-size: 10px;
   color: var(--muted);
   text-transform: lowercase;
@@ -468,6 +534,7 @@ body {
 
 .reasoning__labels span {
   text-align: center;
+  min-width: 0;
 }
 
 .reasoning--no-none .reasoning__dot[data-value="none"],
@@ -485,6 +552,23 @@ body {
   border: 1px dashed var(--border);
   background: rgba(255, 255, 255, 0.6);
   padding: 10px;
+}
+
+.card__alert {
+  margin: 6px 0 10px;
+}
+
+.section-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(190, 60, 42, 0.4);
+  background: rgba(190, 60, 42, 0.1);
+  color: #b03524;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .subsection__header {
@@ -1219,6 +1303,49 @@ body {
   overflow-y: auto;
   flex: 1 1 auto;
   min-height: 0;
+}
+
+.modal--narrow .modal__panel {
+  width: min(420px, 100%);
+}
+
+.modal--stacked {
+  z-index: 60;
+}
+
+.onboarding {
+  gap: 14px;
+}
+
+.onboarding__steps {
+  display: grid;
+  gap: 8px;
+}
+
+.onboarding-step {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  background: var(--surface-2);
+}
+
+.onboarding-step__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-3);
+}
+
+.onboarding-step__text {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.onboarding__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .pricing-legend {
