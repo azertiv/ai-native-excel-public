@@ -27,7 +27,7 @@
       </header>
 
       <main class="app__main">
-        <section class="card card--config is-collapsed" data-collapsible>
+        <section class="card card--config is-collapsed" data-collapsible data-section="config" data-section-title="Configuration" data-section-locked="true">
           <div class="card__header">
             <div>
               <div class="card__title">Configuration</div>
@@ -271,7 +271,7 @@
           </div>
         </section>
 
-        <section class="card card--usage" data-collapsible>
+        <section class="card card--usage" data-collapsible data-section="usage" data-section-title="Utilisation" data-section-locked="true">
           <div class="card__header">
             <div>
               <div class="card__title">Utilisation</div>
@@ -323,7 +323,7 @@
           </div>
         </section>
 
-        <section class="card card--logs is-collapsed" data-collapsible>
+        <section class="card card--logs is-collapsed" data-collapsible data-section="logs" data-section-title="Logs">
           <div class="card__header">
             <div>
             <div class="card__title">Logs</div>
@@ -351,7 +351,7 @@
           </div>
         </section>
 
-        <section class="card card--cache is-collapsed" data-collapsible>
+        <section class="card card--cache is-collapsed" data-collapsible data-section="cache" data-section-title="Cache intelligent">
           <div class="card__header">
             <div>
               <div class="card__title">Cache intelligent</div>
@@ -395,7 +395,7 @@
           </div>
         </section>
 
-        <section class="card card--functions is-collapsed" data-collapsible>
+        <section class="card card--functions is-collapsed" data-collapsible data-section="functions" data-section-title="Fonctions AI.Native">
           <div class="card__header">
             <div>
               <div class="card__title">Fonctions AI.Native</div>
@@ -418,61 +418,77 @@
           <div id="functionsBody" class="card__body">
             <div class="function-list">
               <div class="function-item">
-                <div class="function-item__name">=AI.ASK(prompt, [context])</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.ASK</span>(prompt, [context])</code>
                 <div class="function-item__desc">Réponse directe à une question, avec contexte Excel optionnel.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.WEB(query, [focus], [showSource])</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.WEB</span>(query, [focus], [showSource])</code>
                 <div class="function-item__desc">Recherche web; focus cadre le sujet, showSource=1 renvoie les sources.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.TRANSLATE(textOrRange, targetLang)</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.TRANSLATE</span>(textOrRange, targetLang)</code>
                 <div class="function-item__desc">Traduit un texte ou une plage vers une langue cible (ex : "en").</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.CLASSIFY(textOrRange, labels)</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.CLASSIFY</span>(textOrRange, labels)</code>
                 <div class="function-item__desc">Classe un texte parmi des labels fournis et renvoie le label exact.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.EXTRACT(textOrRange, instruction)</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.EXTRACT</span>(textOrRange, instruction)</code>
                 <div class="function-item__desc">Extrait les informations demandées selon une instruction concise.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.CLEAN(textOrRange)</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.CLEAN</span>(textOrRange)</code>
                 <div class="function-item__desc">Nettoie espaces, retours et bruit pour un texte propre.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.CONSISTENT(textOrRange)</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.CONSISTENT</span>(textOrRange)</code>
                 <div class="function-item__desc">Uniformise des libellés proches dans une plage.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.SUMMARIZE(textOrRange, [mode])</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.SUMMARIZE</span>(textOrRange, [mode])</code>
                 <div class="function-item__desc">Mode 0 = par cellule. Mode 1 = resume global sur la plage.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.FORMULA(description, [context])</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.FORMULA</span>(description, [context])</code>
                 <div class="function-item__desc">Génère une formule Excel complète à partir d'une description.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.TABLE(description, [context])</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.TABLE</span>(description, [context])</code>
                 <div class="function-item__desc">Construit un tableau (en-têtes + lignes) à partir d'un brief.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.FILL(exampleRange, targetRange, instruction)</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.FILL</span>(exampleRange, targetRange, instruction)</code>
                 <div class="function-item__desc">Remplit une plage cible en suivant des exemples.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.KEYSTATUS()</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.KEYSTATUS</span>()</code>
                 <div class="function-item__desc">Affiche l'état des clés et du modèle actif.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.TEST()</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.TEST</span>()</code>
                 <div class="function-item__desc">Vérifie la connexion au fournisseur sélectionné.</div>
               </div>
               <div class="function-item">
-                <div class="function-item__name">=AI.COUNT(range, value)</div>
+                <code class="function-item__name">=<span class="function-item__fn">AI.COUNT</span>(range, value)</code>
                 <div class="function-item__desc">Compte les occurrences exactes d'une valeur dans une plage.</div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--layout" data-section-settings>
+          <div class="card__header">
+            <div>
+              <div class="card__title">Agencement des sections</div>
+              <div class="card__subtitle">Glissez-déposez ou utilisez les flèches pour réorganiser l'affichage.</div>
+            </div>
+          </div>
+
+          <div class="card__body">
+            <div class="section-manager">
+              <div id="sectionManagerList" class="section-manager__list" role="list"></div>
+              <div class="hint">Configuration et Utilisation restent toujours visibles.</div>
             </div>
           </div>
         </section>
