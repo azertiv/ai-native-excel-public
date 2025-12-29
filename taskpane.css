@@ -66,8 +66,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  align-self: flex-start;
-  margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .icon-button--gear {
@@ -77,9 +76,11 @@ body {
 }
 
 .brand {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 12px;
+  width: 100%;
 }
 
 .brand__mark {
@@ -102,6 +103,15 @@ body {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  min-width: 0;
+}
+
+.brand__headline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
 }
 
 .app__title {
@@ -196,6 +206,12 @@ body {
   font-size: 12px;
   color: var(--muted);
   margin-top: 4px;
+}
+
+.card__note {
+  font-size: 12px;
+  color: var(--accent-3);
+  margin-top: 6px;
 }
 
 .card__body {
@@ -348,6 +364,30 @@ body {
 .form-row label {
   font-size: 12px;
   font-weight: 600;
+}
+
+.settings-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-block + .settings-block {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+.settings-block__title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.settings-block--actions .actions {
+  margin-top: 0;
 }
 
 .segmented {
@@ -786,6 +826,7 @@ body {
 
 .status {
   border-top: 1px dashed var(--border);
+  margin-top: 14px;
   padding-top: 10px;
 }
 
@@ -1014,6 +1055,13 @@ body {
 
 .breakdown__name {
   font-weight: 600;
+  min-width: 0;
+}
+
+.breakdown__row--sub .breakdown__name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .breakdown__model {
@@ -1393,6 +1441,7 @@ body {
   font-size: 12px;
   font-weight: 600;
   color: var(--accent-3);
+  min-width: 0;
 }
 
 .section-row__controls {
@@ -1724,11 +1773,6 @@ body {
     align-items: flex-start;
   }
 
-  .app__header-actions {
-    margin-top: 0;
-    align-self: flex-start;
-  }
-
   .breakdown__row {
     grid-template-columns: minmax(0, 1fr) 90px 80px;
   }
@@ -1738,14 +1782,6 @@ body {
     align-items: flex-start;
   }
 
-  .section-row {
-    grid-template-columns: 26px 1fr;
-  }
-
-  .section-row__controls {
-    grid-column: 1 / -1;
-    justify-content: flex-end;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
