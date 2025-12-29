@@ -1,0 +1,307 @@
+{
+  "allowErrorForDataTypeAny": true,
+  "functions": [
+    {
+      "id": "AI.ASK",
+      "name": "ASK",
+      "description": "Pose une question à l'IA (fournisseur par défaut défini dans le panneau), avec contexte optionnel.",
+      "parameters": [
+        {
+          "name": "prompt",
+          "description": "Question or instruction.",
+          "type": "string",
+          "dimensionality": "scalar"
+        },
+        {
+          "name": "contextRange",
+          "description": "Optional range used as context (values).",
+          "type": "any",
+          "dimensionality": "matrix",
+          "optional": true
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "scalar"
+      }
+    },
+    {
+      "id": "AI.WEB",
+      "name": "WEB",
+      "description": "Targeted factual lookup with optional entity focus and source hyperlink (returns an error or justification when data is not fully confirmed).",
+      "parameters": [
+        {
+          "name": "query",
+          "description": "Factual question to answer precisely.",
+          "type": "string",
+          "dimensionality": "scalar"
+        },
+        {
+          "name": "focus",
+          "description": "Optional entity/context cell or range.",
+          "type": "any",
+          "dimensionality": "matrix",
+          "optional": true
+        },
+        {
+          "name": "showSource",
+          "description": "1 to wrap the value in a HYPERLINK with its source, else 0.",
+          "type": "number",
+          "dimensionality": "scalar",
+          "optional": true
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "scalar"
+      }
+    },
+    {
+      "id": "AI.EXTRACT",
+      "name": "EXTRACT",
+      "description": "Extrait des informations d'un texte (ou d'une plage) selon une instruction.",
+      "parameters": [
+        {
+          "name": "textOrRange",
+          "description": "Input text or range to search in.",
+          "type": "any",
+          "dimensionality": "matrix"
+        },
+        {
+          "name": "instruction",
+          "description": "What to extract (e.g. 'Mails', 'Names').",
+          "type": "string",
+          "dimensionality": "scalar"
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "matrix"
+      }
+    },
+    {
+      "id": "AI.CLASSIFY",
+      "name": "CLASSIFY",
+      "description": "Classe un texte (ou une plage) dans une liste de labels.",
+      "parameters": [
+        {
+          "name": "text",
+          "description": "Input text (cell or range).",
+          "type": "any",
+          "dimensionality": "matrix"
+        },
+        {
+          "name": "labels",
+          "description": "Labels as \"A|B|C\" (or comma/semicolon) or a range.",
+          "type": "any",
+          "dimensionality": "matrix"
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "matrix"
+      }
+    },
+    {
+      "id": "AI.TRANSLATE",
+      "name": "TRANSLATE",
+      "description": "Traduit du texte (ou une plage) vers une langue cible.",
+      "parameters": [
+        {
+          "name": "text",
+          "description": "Input text (cell or range).",
+          "type": "any",
+          "dimensionality": "matrix"
+        },
+        {
+          "name": "targetLang",
+          "description": "Language code (e.g., \"en\").",
+          "type": "string",
+          "dimensionality": "scalar"
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "matrix"
+      }
+    },
+    {
+      "id": "AI.TABLE",
+      "name": "TABLE",
+      "description": "Génère un tableau (matrice) à partir d'une description et d'un contexte optionnel.",
+      "parameters": [
+        {
+          "name": "prompt",
+          "description": "Table generation prompt.",
+          "type": "string",
+          "dimensionality": "scalar"
+        },
+        {
+          "name": "contextRange",
+          "description": "Optional context range.",
+          "type": "any",
+          "dimensionality": "matrix",
+          "optional": true
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "matrix"
+      }
+    },
+    {
+      "id": "AI.FILL",
+      "name": "FILL",
+      "description": "Complète une plage cible à partir d'exemples et d'une instruction.",
+      "parameters": [
+        {
+          "name": "exampleRange",
+          "description": "2-column examples [input|output].",
+          "type": "any",
+          "dimensionality": "matrix"
+        },
+        {
+          "name": "targetRange",
+          "description": "1-column inputs to transform.",
+          "type": "any",
+          "dimensionality": "matrix"
+        },
+        {
+          "name": "instruction",
+          "description": "Transformation instruction.",
+          "type": "string",
+          "dimensionality": "scalar"
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "matrix"
+      }
+    },
+    {
+      "id": "AI.FORMULA",
+      "name": "FORMULA",
+      "description": "Génère uniquement une formule Excel (=...) à partir d'une description et d'un contexte optionnel.",
+      "parameters": [
+        {
+          "name": "instruction",
+          "description": "Instruction for the formula.",
+          "type": "string",
+          "dimensionality": "scalar"
+        },
+        {
+          "name": "contextRange",
+          "description": "Optional context data.",
+          "type": "any",
+          "dimensionality": "matrix",
+          "optional": true
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "scalar"
+      }
+    },
+    {
+      "id": "AI.COUNT",
+      "name": "COUNT",
+      "description": "Count how many cells in a range match a given value (case-insensitive).",
+      "parameters": [
+        {
+          "name": "range",
+          "description": "Range of cells to inspect.",
+          "type": "any",
+          "dimensionality": "matrix"
+        },
+        {
+          "name": "value",
+          "description": "Value to count (e.g., 'Homme').",
+          "type": "any",
+          "dimensionality": "scalar"
+        }
+      ],
+      "result": {
+        "type": "number",
+        "dimensionality": "scalar"
+      }
+    },
+    {
+      "id": "AI.CLEAN",
+      "name": "CLEAN",
+      "description": "Nettoie/normalise du texte (ou une plage) pour Excel.",
+      "parameters": [
+        {
+          "name": "textOrRange",
+          "description": "Input text or range.",
+          "type": "any",
+          "dimensionality": "matrix"
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "matrix"
+      }
+    },
+    {
+      "id": "AI.CONSISTENT",
+      "name": "CONSISTENT",
+      "description": "Harmonise des valeurs textuelles (orthographe/casse/variantes) pour faciliter tris et agrégations.",
+      "parameters": [
+        {
+          "name": "textOrRange",
+          "description": "Range of related values to harmonize.",
+          "type": "any",
+          "dimensionality": "matrix"
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "matrix"
+      }
+    },
+    {
+      "id": "AI.SUMMARIZE",
+      "name": "SUMMARIZE",
+      "description": "Résume un texte (ou une plage).",
+      "parameters": [
+        {
+          "name": "textOrRange",
+          "description": "Text or range to summarize.",
+          "type": "any",
+          "dimensionality": "matrix"
+        },
+        {
+          "name": "mode",
+          "description": "0 = per cell (default). 1 = aggregate summary for the full range.",
+          "type": "number",
+          "dimensionality": "scalar",
+          "optional": true
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "matrix"
+      }
+    },
+    {
+      "id": "AI.KEYSTATUS",
+      "name": "KEY_STATUS",
+      "description": "Affiche l'état des clés API, des modèles et du fournisseur par défaut.",
+      "parameters": [],
+      "result": {
+        "type": "string",
+        "dimensionality": "scalar"
+      }
+    },
+    {
+      "id": "AI.TEST",
+      "name": "TEST",
+      "description": "Teste le fournisseur par défaut configuré dans le panneau.",
+      "parameters": [],
+      "result": {
+        "type": "string",
+        "dimensionality": "scalar"
+      }
+    }
+  ]
+}

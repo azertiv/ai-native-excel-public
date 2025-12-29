@@ -1,0 +1,450 @@
+﻿<!-- src/taskpane/taskpane.html -->
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI.Native</title>
+
+    <!-- Optional: Fabric for Office-like typography -->
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.3/fabric.min.css" />
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.3/fabric.components.min.css" />
+
+    <link rel="stylesheet" href="taskpane.css" />
+  </head>
+
+  <body class="ms-Fabric" dir="ltr">
+    <div class="app">
+      <header class="app__header">
+        <div class="brand">
+          <div class="brand__mark">AI</div>
+          <div class="brand__text">
+            <div class="app__title">AI.Native</div>
+            <div class="app__subtitle">Fonctions IA personnalisées pour Excel, prêtes à l'emploi.</div>
+          </div>
+        </div>
+      </header>
+
+      <main class="app__main">
+        <section class="card card--config is-collapsed" data-collapsible>
+          <div class="card__header">
+            <div>
+              <div class="card__title">Configuration</div>
+              <div class="card__subtitle">
+                Le fournisseur est défini ici (pas dans les formules). Les tokens max s'appliquent aux deux fournisseurs.
+              </div>
+              </div>
+              <div class="card__actions">
+                <button id="pricingHelp" class="icon-button" type="button" title="Détails des coûts" aria-label="Voir les détails des coûts">?</button>
+                <button
+                  class="collapse-toggle"
+                  type="button"
+                data-collapse-toggle
+                aria-expanded="false"
+                aria-controls="configBody"
+                title="Masquer"
+              >
+                <span class="chevron"></span>
+              </button>
+            </div>
+          </div>
+
+          <div id="configBody" class="card__body">
+            <div class="config-grid">
+              <div class="form-row">
+                <label>Fournisseur par défaut</label>
+                <div class="segmented" role="group" aria-label="Fournisseur par défaut">
+                  <button id="providerGemini" class="segmented__btn" type="button" data-provider="gemini">
+                    <span class="segmented__label">Gemini</span>
+                    <span class="favorite-icon" title="Mod&egrave;le recommand&eacute;" aria-label="Mod&egrave;le recommand&eacute;" role="img">&#9733;</span>
+                  </button>
+                  <button id="providerOpenAI" class="segmented__btn" type="button" data-provider="openai">
+                    <span class="segmented__label">OpenAI</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <label for="maxTokensRange">Max output tokens</label>
+                <div class="range">
+                  <input id="maxTokensRange" class="range__input" type="range" min="7" max="17" step="1" />
+                  <div class="range__value">
+                    <span id="maxTokensValue">1024</span> tokens
+                  </div>
+                </div>
+                <div class="hint">Conseil : 256–2048 pour la plupart des usages. Plus = réponses plus longues.</div>
+              </div>
+            </div>
+
+            <div class="subsection is-collapsed" data-collapsible>
+              <button
+                class="subsection__header"
+                type="button"
+                data-collapse-toggle
+                aria-expanded="false"
+                aria-controls="settingsBody"
+              >
+                <span>Réglages</span>
+                <span class="chevron"></span>
+              </button>
+
+              <div id="settingsBody" class="subsection__body">
+                <div class="tabs" role="tablist" aria-label="Fournisseurs">
+                  <button id="tabGemini" class="tab tab--active" type="button" role="tab" aria-selected="true" aria-controls="panelGemini">
+                    Gemini
+                  </button>
+                  <button id="tabOpenAI" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panelOpenAI">
+                    OpenAI
+                  </button>
+                </div>
+
+                <div id="panelGemini" class="tab-panel tab-panel--active" role="tabpanel" aria-labelledby="tabGemini">
+                  <div class="form-row">
+                    <label for="geminiModel">Modèle Gemini</label>
+                    <select id="geminiModel" class="input input--select"></select>
+                    <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion.</div>
+                  </div>
+
+              <div class="form-row">
+                <label for="geminiKey">Clé API Gemini</label>
+                <input id="geminiKey" class="input" type="password" placeholder="AIza..." spellcheck="false" />
+                <div id="geminiKeyStatus" class="key-status">Clé inconnue</div>
+                <div class="hint">La clé est stockée localement (OfficeRuntime.storage ou localStorage).</div>
+              </div>
+
+                  <div class="actions">
+                    <button id="saveGemini" class="btn btn--primary" type="button">Enregistrer</button>
+                    <button id="clearGemini" class="btn" type="button">Effacer</button>
+                    <button id="testGemini" class="btn" type="button">Tester</button>
+                  </div>
+                </div>
+
+                <div id="panelOpenAI" class="tab-panel" role="tabpanel" aria-labelledby="tabOpenAI">
+                  <div class="form-row">
+                    <label for="openaiModel">Modèle OpenAI</label>
+                    <select id="openaiModel" class="input input--select"></select>
+                    <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion.</div>
+                  </div>
+                  <div class="form-row">
+                    <label for="openaiReasoningEffort">Effort de raisonnement</label>
+                    <div class="reasoning">
+                      <div class="reasoning__control">
+                        <input id="openaiReasoningEffort" class="reasoning__input" type="range" min="0" max="4" step="1" />
+                        <div class="reasoning__track" aria-hidden="true">
+                          <span class="reasoning__dot" data-value="none"></span>
+                          <span class="reasoning__dot" data-value="minimal"></span>
+                          <span class="reasoning__dot" data-value="low"></span>
+                          <span class="reasoning__dot" data-value="medium"></span>
+                          <span class="reasoning__dot" data-value="high"></span>
+                        </div>
+                      </div>
+                      <div class="reasoning__labels" aria-hidden="true">
+                        <span data-value="none">none</span>
+                        <span data-value="minimal">minimal</span>
+                        <span data-value="low">low</span>
+                        <span data-value="medium">medium</span>
+                        <span data-value="high">high</span>
+                      </div>
+                    </div>
+                    <div class="hint">Docs: low/medium/high. Autres valeurs peuvent echouer.</div>
+                  </div>
+              
+                  <div class="form-row">
+                <label for="openaiKey">Clé API OpenAI</label>
+                <input id="openaiKey" class="input" type="password" placeholder="sk-..." spellcheck="false" />
+                <div id="openaiKeyStatus" class="key-status">Clé inconnue</div>
+                <div class="hint">Important : aucune température n'est envoyée (GPT-5 Mini la rejette).</div>
+              </div>
+
+                  <div class="actions">
+                    <button id="saveOpenAI" class="btn btn--primary" type="button">Enregistrer</button>
+                    <button id="clearOpenAI" class="btn" type="button">Effacer</button>
+                    <button id="testOpenAI" class="btn" type="button">Tester</button>
+                  </div>
+                </div>
+
+                <div class="status" aria-live="polite">
+                  <div id="statusLine" class="status__line">Chargement…</div>
+                  <div class="status__meta">Stockage : <span id="storageBackend">?</span></div>
+                  <details class="status__details">
+                    <summary>Détails</summary>
+                    <pre id="statusDetails" class="status__pre"></pre>
+                  </details>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--usage" data-collapsible>
+          <div class="card__header">
+            <div>
+              <div class="card__title">Utilisation</div>
+              <div class="card__subtitle">Suivi des tokens et coûts estimés.</div>
+            </div>
+            <div class="card__actions">
+              <button
+                class="collapse-toggle"
+                type="button"
+                data-collapse-toggle
+                aria-expanded="true"
+                aria-controls="usageBody"
+                title="Masquer"
+              >
+                <span class="chevron"></span>
+              </button>
+            </div>
+          </div>
+
+          <div id="usageBody" class="card__body">
+            <div class="stats-grid">
+              <div class="stat">
+                <div class="stat__label">Tokens totaux</div>
+                <div id="usageTokensTotal" class="stat__value">0</div>
+                <div class="stat__meta">
+                  <span id="usageTokensInTotal">0</span> entrée · <span id="usageTokensOutTotal">0</span> sortie
+                </div>
+              </div>
+              <div class="stat stat--accent">
+                <div class="stat__label">Coût estimé total</div>
+                <div id="usageCostTotal" class="stat__value">€0.0000</div>
+                <div class="stat__meta">
+                  Gemini <span id="usageCostGemini">€0.0000</span> · OpenAI <span id="usageCostOpenAI">€0.0000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="breakdown">
+              <div id="usageBreakdown" class="breakdown__list"></div>
+            </div>
+
+            <div class="chart">
+              <div class="chart__header">
+                <div class="chart__title">Activité sur 60 minutes</div>
+                <div class="chart__legend">Tokens (entrée + sortie)</div>
+              </div>
+              <canvas id="usageChart" class="chart__canvas" aria-label="Graphique d'utilisation dernière heure"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--logs is-collapsed" data-collapsible>
+          <div class="card__header">
+            <div>
+              <div class="card__title">Logs</div>
+              <div class="card__subtitle">Derniers appels IA et diagnostics.</div>
+            </div>
+            <div class="card__actions">
+              <button id="clearLogs" class="btn btn--ghost" type="button">Effacer</button>
+              <button
+                class="collapse-toggle"
+                type="button"
+                data-collapse-toggle
+                aria-expanded="false"
+                aria-controls="logsBody"
+                title="Masquer"
+              >
+                <span class="chevron"></span>
+              </button>
+            </div>
+          </div>
+
+          <div id="logsBody" class="card__body">
+            <div class="log">
+              <div id="logList" class="log__list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--cache is-collapsed" data-collapsible>
+          <div class="card__header">
+            <div>
+              <div class="card__title">Cache intelligent</div>
+              <div class="card__subtitle">Les réponses sont conservées localement pour éviter les relances et économiser des tokens.</div>
+            </div>
+            <div class="card__actions">
+              <div id="cacheStatus" class="chip chip--success">Actif</div>
+              <button
+                class="collapse-toggle"
+                type="button"
+                data-collapse-toggle
+                aria-expanded="false"
+                aria-controls="cacheBody"
+                title="Masquer"
+              >
+                <span class="chevron"></span>
+              </button>
+            </div>
+          </div>
+
+          <div id="cacheBody" class="card__body">
+            <div class="stats-grid">
+              <div class="stat">
+                <div class="stat__label">Entrées en cache</div>
+                <div id="cacheEntries" class="stat__value">0</div>
+                <div class="stat__meta">
+                  Gemini <span id="cacheGeminiEntries">0</span> · OpenAI <span id="cacheOpenAIEntries">0</span>
+                </div>
+              </div>
+              <div class="stat">
+                <div class="stat__label">Taille approx.</div>
+                <div id="cacheSize" class="stat__value">0 KB</div>
+                <div class="stat__meta">TTL standard 7 jours · Web 1 heure</div>
+              </div>
+            </div>
+
+            <div class="actions actions--right">
+              <button id="refreshCache" class="btn btn--ghost" type="button">Actualiser</button>
+              <button id="clearCache" class="btn btn--danger" type="button">Vider le cache</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--functions is-collapsed" data-collapsible>
+          <div class="card__header">
+            <div>
+              <div class="card__title">Fonctions AI.Native</div>
+              <div class="card__subtitle">Toutes les fonctions disponibles dans l'extension.</div>
+            </div>
+            <div class="card__actions">
+              <button
+                class="collapse-toggle"
+                type="button"
+                data-collapse-toggle
+                aria-expanded="false"
+                aria-controls="functionsBody"
+                title="Masquer"
+              >
+                <span class="chevron"></span>
+              </button>
+            </div>
+          </div>
+
+          <div id="functionsBody" class="card__body">
+            <div class="function-list">
+              <div class="function-item">
+                <div class="function-item__name">=AI.ASK(prompt, [context])</div>
+                <div class="function-item__desc">Réponse directe à une question, avec contexte Excel optionnel.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.WEB(query, [focus], [showSource])</div>
+                <div class="function-item__desc">Recherche web; focus cadre le sujet, showSource=1 renvoie les sources.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.TRANSLATE(textOrRange, targetLang)</div>
+                <div class="function-item__desc">Traduit un texte ou une plage vers une langue cible (ex : "en").</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.CLASSIFY(textOrRange, labels)</div>
+                <div class="function-item__desc">Classe un texte parmi des labels fournis et renvoie le label exact.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.EXTRACT(textOrRange, instruction)</div>
+                <div class="function-item__desc">Extrait les informations demandées selon une instruction concise.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.CLEAN(textOrRange)</div>
+                <div class="function-item__desc">Nettoie espaces, retours et bruit pour un texte propre.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.CONSISTENT(textOrRange)</div>
+                <div class="function-item__desc">Uniformise des libellés proches dans une plage.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.SUMMARIZE(textOrRange, [mode])</div>
+                <div class="function-item__desc">Mode 0 = par cellule. Mode 1 = resume global sur la plage.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.FORMULA(description, [context])</div>
+                <div class="function-item__desc">Génère une formule Excel complète à partir d'une description.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.TABLE(description, [context])</div>
+                <div class="function-item__desc">Construit un tableau (en-têtes + lignes) à partir d'un brief.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.FILL(exampleRange, targetRange, instruction)</div>
+                <div class="function-item__desc">Remplit une plage cible en suivant des exemples.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.KEYSTATUS()</div>
+                <div class="function-item__desc">Affiche l'état des clés et du modèle actif.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.TEST()</div>
+                <div class="function-item__desc">Vérifie la connexion au fournisseur sélectionné.</div>
+              </div>
+              <div class="function-item">
+                <div class="function-item__name">=AI.COUNT(range, value)</div>
+                <div class="function-item__desc">Compte les occurrences exactes d'une valeur dans une plage.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="pricingModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="pricingTitle">
+      <div class="modal__backdrop" data-modal-close></div>
+      <div class="modal__panel" role="document">
+        <div class="modal__header">
+          <div>
+            <div id="pricingTitle" class="modal__title">Détails des coûts</div>
+            <div class="modal__subtitle">Tarifs par 1M tokens, en euros.</div>
+          </div>
+          <button class="icon-button" type="button" data-modal-close aria-label="Fermer">x</button>
+        </div>
+        <div class="modal__body">
+          <div class="pricing-legend">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion.</div>
+          <div class="pricing-section">
+            <div class="pricing-section__title">Gemini</div>
+            <div class="pricing-table__wrap">
+              <table class="pricing-table">
+                <thead>
+                  <tr>
+                    <th>MDL</th>
+                    <th class="pricing-table__col-price">IN</th>
+                    <th class="pricing-table__col-price">OUT</th>
+                    <th class="pricing-table__col-icon">$</th>
+                    <th class="pricing-table__col-icon">&#129504;</th>
+                  </tr>
+                </thead>
+                <tbody id="pricingTableBodyGemini"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="pricing-section">
+            <div class="pricing-section__title">OpenAI</div>
+            <div class="pricing-table__wrap">
+              <table class="pricing-table">
+                <thead>
+                  <tr>
+                    <th>MDL</th>
+                    <th class="pricing-table__col-price">IN</th>
+                    <th class="pricing-table__col-price">OUT</th>
+                    <th class="pricing-table__col-icon">$</th>
+                    <th class="pricing-table__col-icon">&#129504;</th>
+                  </tr>
+                </thead>
+                <tbody id="pricingTableBodyOpenAI"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shared Runtime: functions.js is loaded into the same long-lived runtime as taskpane -->
+    <script src="functions.js"></script>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script src="taskpane.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
