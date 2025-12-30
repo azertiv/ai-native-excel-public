@@ -54,22 +54,37 @@
             </div>
           </div>
           <div id="onboardingBody" class="card__body setup">
-            <div class="setup-step">
+            <div id="setupLicenseStep" class="setup-step">
               <div class="setup-step__header">
                 <span class="setup-step__badge">1</span>
                 <div class="setup-step__titles">
                   <div class="setup-step__title">Activer votre licence</div>
-                  <div class="setup-step__subtitle">Essai gratuit : 5 formules par jour</div>
                 </div>
                 <div id="licenseKeyStatus" class="key-status">Aucune licence enregistrée</div>
               </div>
               <div class="setup-step__content">
-                <div class="setup-offer">
-                  <div class="setup-offer__headline">Abonnement Neurow</div>
-                  <div class="setup-offer__meta">Essai gratuit : 5 formules/jour · Abonnement : 5,99 $/mois ou 59 $/an</div>
+                <div class="setup-license-switch segmented" role="tablist" aria-label="Choix de licence">
+                  <button id="licenseModeSubscribe" class="segmented__btn segmented__btn--active" type="button" aria-selected="true">S'abonner</button>
+                  <button id="licenseModeHave" class="segmented__btn" type="button" aria-selected="false">J'ai une licence</button>
+                </div>
+
+                <div id="licenseSubscribe" class="setup-offer">
+                  <div class="setup-offer__headline">Choisissez votre formule</div>
+                  <div class="setup-offer__plans">
+                    <div class="setup-plan">
+                      <div class="setup-plan__label">Mensuel</div>
+                      <div class="setup-plan__price">5,99 $</div>
+                      <div class="setup-plan__period">/mois</div>
+                    </div>
+                    <div class="setup-plan">
+                      <div class="setup-plan__label">Annuel</div>
+                      <div class="setup-plan__price">59 $</div>
+                      <div class="setup-plan__period">/an</div>
+                    </div>
+                  </div>
                   <ul class="setup-offer__list">
-                    <li>Formules Neurow illimitées après l'essai</li>
-                    <li>Annulation à tout moment</li>
+                    <li>Formules Neurow illimitées</li>
+                    <li>Satisfait ou remboursé sous 14 jours</li>
                   </ul>
                   <div class="setup-offer__actions">
                     <a
@@ -79,23 +94,22 @@
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Acheter une licence
+                      S'abonner
                     </a>
-                    <button
-                      id="licenseRevealBtn"
-                      class="btn btn--ghost"
-                      type="button"
-                      aria-expanded="false"
-                      aria-controls="licenseEntry"
-                    >
-                      J'ai déjà une licence
-                    </button>
                   </div>
                 </div>
 
                 <div id="licenseEntry" class="setup-license is-hidden">
                   <div class="form-row">
-                    <label for="licenseKeyInput">Clé de licence</label>
+                    <div class="label-row">
+                      <label for="licenseKeyInput">Clé de licence</label>
+                      <span class="help" data-help>
+                        <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé de licence" aria-expanded="false">?</button>
+                        <span class="help__popup" role="tooltip">
+                          Clé reçue par email après achat (mensuel ou annuel)
+                        </span>
+                      </span>
+                    </div>
                     <div class="setup-license__row">
                       <input
                         id="licenseKeyInput"
@@ -107,11 +121,6 @@
                       <button id="licenseActivateBtn" class="btn btn--primary" type="button">Activer</button>
                     </div>
                   </div>
-                  <div class="setup-license__actions">
-                    <button id="licenseTestBtn" class="btn" type="button">Tester</button>
-                    <button id="licenseClearBtn" class="btn btn--ghost" type="button">Effacer</button>
-                  </div>
-                  <div id="licenseKeyMeta" class="hint">Clé reçue par email après achat (mensuel ou annuel)</div>
                 </div>
               </div>
             </div>
@@ -120,8 +129,7 @@
               <div class="setup-step__header">
                 <span class="setup-step__badge">2</span>
                 <div class="setup-step__titles">
-                  <div class="setup-step__title">Ajouter une clé API</div>
-                  <div class="setup-step__subtitle">Gemini ou OpenAI · Une seule suffit</div>
+                  <div class="setup-step__title">Ajouter une clé API (Gemini / OpenAI)</div>
                 </div>
               </div>
               <div class="setup-step__content">
@@ -134,11 +142,6 @@
                     <div class="form-row">
                       <label for="geminiKey">Clé API Gemini</label>
                       <input id="geminiKey" class="input" type="password" placeholder="AIza..." spellcheck="false" />
-                      <div class="hint">Générée dans votre console Google</div>
-                    </div>
-                    <div class="actions">
-                      <button id="testGemini" class="btn" type="button">Tester</button>
-                      <button id="clearGemini" class="btn btn--ghost" type="button">Effacer</button>
                     </div>
                   </div>
 
@@ -150,11 +153,6 @@
                     <div class="form-row">
                       <label for="openaiKey">Clé API OpenAI</label>
                       <input id="openaiKey" class="input" type="password" placeholder="sk-..." spellcheck="false" />
-                      <div class="hint">Disponible sur platform.openai.com</div>
-                    </div>
-                    <div class="actions">
-                      <button id="testOpenAI" class="btn" type="button">Tester</button>
-                      <button id="clearOpenAI" class="btn btn--ghost" type="button">Effacer</button>
                     </div>
                   </div>
                 </div>
@@ -166,8 +164,7 @@
           <div class="card__header">
             <div>
               <div class="card__title">Configuration</div>
-              <div class="card__subtitle">Choisissez le fournisseur, les modèles et les limites de génération</div>
-              <div class="card__note">Si vous n'avez pas le résultat attendu, changez de modèle ou augmentez l'effort de raisonnement.</div>
+              <div class="card__subtitle">Si vous n'avez pas le résultat attendu, changez de modèle ou augmentez l'effort de raisonnement.</div>
             </div>
             <div class="card__actions">
               <button id="pricingHelp" class="icon-button" type="button" title="Détails des coûts" aria-label="Voir les détails des coûts">?</button>
@@ -204,6 +201,10 @@
                   <button id="providerOpenAI" class="segmented__btn" type="button" data-provider="openai">
                     <span class="segmented__label">OpenAI</span>
                   </button>
+                </div>
+                <div id="configProviderGate" class="inline-alert is-hidden">
+                  <span id="configProviderGateText">Ajoutez une clé API pour activer un fournisseur.</span>
+                  <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
                 </div>
               </div>
 
@@ -642,7 +643,7 @@
           <div class="onboarding__steps">
             <div class="onboarding-step">
               <div class="onboarding-step__title">1. Activez votre licence</div>
-              <div class="onboarding-step__text">Essai gratuit : 5 formules/jour · Abonnement : 5,99 $/mois ou 59 $/an</div>
+              <div class="onboarding-step__text">Satisfait ou remboursé sous 14 jours · Abonnement : 5,99 $/mois ou 59 $/an</div>
             </div>
             <div class="onboarding-step">
               <div class="onboarding-step__title">2. Ajoutez vos clés API</div>
