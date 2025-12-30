@@ -34,20 +34,11 @@
       </header>
 
       <main class="app__main">
-        <button
-          class="section-alert section-alert--error section-alert--action section-alert--banner is-hidden"
-          data-key-alert
-          type="button"
-          role="alert"
-          title="Ouvrir Mise en route"
-        >
-          Aucune clé API enregistrée · Ouvrir Mise en route
-        </button>
-        <section class="card card--license" data-collapsible data-section="onboarding" data-section-title="Mise en route">
+        <section class="card card--license is-hidden" data-collapsible data-section="onboarding" data-section-title="Mise en route">
           <div class="card__header">
             <div>
               <div class="card__title">Mise en route</div>
-              <div class="card__subtitle">Activez votre licence et ajoutez vos clés API pour démarrer sur Neurow</div>
+              <div class="card__subtitle">Deux étapes rapides pour activer Neurow</div>
             </div>
             <div class="card__actions">
               <button
@@ -68,21 +59,16 @@
                 <span class="setup-step__badge">1</span>
                 <div class="setup-step__titles">
                   <div class="setup-step__title">Activer votre licence</div>
-                  <div class="setup-step__subtitle">L'essai gratuit est limité à 5 formules par jour</div>
+                  <div class="setup-step__subtitle">Essai gratuit : 5 formules par jour</div>
                 </div>
                 <div id="licenseKeyStatus" class="key-status">Aucune licence enregistrée</div>
               </div>
               <div class="setup-step__content">
                 <div class="setup-offer">
-                  <div class="setup-offer__headline">Passez en illimité</div>
-                  <div class="setup-offer__pricing">
-                    <span class="setup-pill setup-pill--accent">5,99 $/mois</span>
-                    <span class="setup-pill">59 $/an</span>
-                    <span class="setup-pill setup-pill--trial">Essai : 5 formules/jour</span>
-                  </div>
+                  <div class="setup-offer__headline">Abonnement Neurow</div>
+                  <div class="setup-offer__meta">Essai gratuit : 5 formules/jour · Abonnement : 5,99 $/mois ou 59 $/an</div>
                   <ul class="setup-offer__list">
-                    <li>Accès complet aux fonctions Neurow</li>
-                    <li>Usage illimité des formules</li>
+                    <li>Formules Neurow illimitées après l'essai</li>
                     <li>Annulation à tout moment</li>
                   </ul>
                   <div class="setup-offer__actions">
@@ -134,8 +120,8 @@
               <div class="setup-step__header">
                 <span class="setup-step__badge">2</span>
                 <div class="setup-step__titles">
-                  <div class="setup-step__title">Ajouter une API key Gemini ou OpenAI</div>
-                  <div class="setup-step__subtitle">Les clés sont stockées localement sur cette machine</div>
+                  <div class="setup-step__title">Ajouter une clé API</div>
+                  <div class="setup-step__subtitle">Gemini ou OpenAI · Une seule suffit</div>
                 </div>
               </div>
               <div class="setup-step__content">
@@ -517,6 +503,10 @@
                   </span>
                 </div>
                 <select id="geminiModel" class="input input--select"></select>
+                <div id="geminiModelGate" class="inline-alert is-hidden">
+                  <span>Ajoutez une clé API pour choisir un modèle.</span>
+                  <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
+                </div>
                 <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion</div>
               </div>
             </div>
@@ -581,6 +571,10 @@
                   </span>
                 </div>
                 <select id="openaiModel" class="input input--select"></select>
+                <div id="openaiModelGate" class="inline-alert is-hidden">
+                  <span>Ajoutez une clé API pour choisir un modèle.</span>
+                  <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
+                </div>
                 <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion</div>
               </div>
             </div>
