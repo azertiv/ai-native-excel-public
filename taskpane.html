@@ -73,19 +73,14 @@
                   <div class="setup-offer__plans">
                     <div class="setup-plan">
                       <div class="setup-plan__label">Mensuel</div>
-                      <div class="setup-plan__price">5,99 $</div>
-                      <div class="setup-plan__period">/mois</div>
+                      <div class="setup-plan__price">5,99 $ <span class="setup-plan__period">/mois</span></div>
                     </div>
                     <div class="setup-plan">
                       <div class="setup-plan__label">Annuel</div>
-                      <div class="setup-plan__price">59 $</div>
-                      <div class="setup-plan__period">/an</div>
+                      <div class="setup-plan__price">59 $ <span class="setup-plan__period">/an</span></div>
                     </div>
                   </div>
-                  <ul class="setup-offer__list">
-                    <li>Formules Neurow illimitées</li>
-                    <li>Satisfait ou remboursé sous 14 jours</li>
-                  </ul>
+                  <div class="setup-offer__guarantee">Satisfait ou remboursé sous 14 jours</div>
                   <div class="setup-offer__actions">
                     <a
                       id="licenseCheckoutLink"
@@ -136,23 +131,21 @@
                 <div class="setup-keys">
                   <div class="setup-key-card">
                     <div class="setup-key-card__header">
-                      <div class="setup-key-card__title">Gemini</div>
+                      <div class="setup-key-card__title">Clé API Gemini</div>
                       <div id="geminiKeyStatus" class="key-status">Clé manquante</div>
                     </div>
                     <div class="form-row">
-                      <label for="geminiKey">Clé API Gemini</label>
-                      <input id="geminiKey" class="input" type="password" placeholder="AIza..." spellcheck="false" />
+                      <input id="geminiKey" class="input" type="password" placeholder="AIza..." spellcheck="false" aria-label="Clé API Gemini" />
                     </div>
                   </div>
 
                   <div class="setup-key-card">
                     <div class="setup-key-card__header">
-                      <div class="setup-key-card__title">OpenAI</div>
+                      <div class="setup-key-card__title">Clé API OpenAI</div>
                       <div id="openaiKeyStatus" class="key-status">Clé manquante</div>
                     </div>
                     <div class="form-row">
-                      <label for="openaiKey">Clé API OpenAI</label>
-                      <input id="openaiKey" class="input" type="password" placeholder="sk-..." spellcheck="false" />
+                      <input id="openaiKey" class="input" type="password" placeholder="sk-..." spellcheck="false" aria-label="Clé API OpenAI" />
                     </div>
                   </div>
                 </div>
@@ -214,7 +207,7 @@
                   <span class="help" data-help>
                     <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide max tokens" aria-expanded="false">?</button>
                     <span class="help__popup" role="tooltip">
-                      Limite la longueur des réponses pour Gemini et OpenAI · Plus haut = réponses plus longues, coût et latence plus élevés
+                      Limite la longueur des réponses pour Gemini et OpenAI · Plus haut = réponses plus longues, coût et latence plus élevés · Conseil : 512–4096 pour la plupart des usages · Plus = réponses plus longues
                     </span>
                   </span>
                 </div>
@@ -224,7 +217,6 @@
                     <span id="maxTokensValue">4096</span> tokens
                   </div>
                 </div>
-                <div class="hint">Conseil : 512–4096 pour la plupart des usages · Plus = réponses plus longues</div>
               </div>
             </div>
 
@@ -238,6 +230,7 @@
               <div class="card__subtitle">Suivez les tokens et les coûts estimés par fournisseur</div>
             </div>
             <div class="card__actions">
+              <div id="usageSummary" class="usage-summary" title="Coût estimé total">€0.0000</div>
               <button
                 class="collapse-toggle"
                 type="button"
@@ -319,6 +312,12 @@
             </div>
             <div class="card__actions">
               <div id="cacheStatus" class="chip chip--success">Actif</div>
+              <span class="help" data-help>
+                <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide cache intelligent" aria-expanded="false">?</button>
+                <span class="help__popup" role="tooltip">
+                  Stocke localement les réponses pour éviter des recalculs inutiles · Réduit la latence et le coût · Vous pouvez le vider à tout moment
+                </span>
+              </span>
               <button
                 class="collapse-toggle"
                 type="button"

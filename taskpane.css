@@ -196,6 +196,31 @@ body {
   flex-shrink: 0;
 }
 
+.usage-summary {
+  display: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-3);
+  white-space: nowrap;
+}
+
+.card--usage.is-collapsed .usage-summary {
+  display: inline-flex;
+}
+
+.card--usage .card__header {
+  align-items: center;
+}
+
+.card--usage .card__actions {
+  align-self: center;
+  margin-top: 0;
+}
+
+.card--usage.is-collapsed .card__subtitle {
+  display: none;
+}
+
 .card__title {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 600;
@@ -823,6 +848,9 @@ body {
   font-size: 16px;
   font-weight: 700;
   color: var(--accent-3);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
 }
 
 .setup-plan__period {
@@ -830,15 +858,15 @@ body {
   color: var(--muted);
 }
 
-.setup-offer__list {
-  margin: 0;
-  padding-left: 18px;
+.setup-offer__guarantee {
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(42, 157, 143, 0.3);
+  background: rgba(42, 157, 143, 0.12);
+  color: var(--accent-2);
   font-size: 12px;
-  color: var(--accent-3);
-}
-
-.setup-offer__list li + li {
-  margin-top: 4px;
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 10px;
 }
 
 .setup-offer__actions {
@@ -846,6 +874,7 @@ body {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .setup-offer__actions .btn--primary {
@@ -1402,6 +1431,11 @@ body {
   gap: 2px;
 }
 
+.log-item--empty {
+  font-size: 11px;
+  color: var(--muted);
+}
+
 .log-item--ok {
   border-color: rgba(42, 157, 143, 0.4);
 }
@@ -1618,10 +1652,9 @@ body {
 }
 
 .function-item {
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  padding: 10px 12px;
-  background: var(--surface-2);
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
 .function-item__name {
@@ -1630,10 +1663,9 @@ body {
   font-size: 12px;
   font-weight: 600;
   color: var(--accent-3);
-  background: rgba(38, 70, 83, 0.06);
-  border: 1px solid rgba(38, 70, 83, 0.14);
-  border-radius: 8px;
-  padding: 6px 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .function-item__fn {
