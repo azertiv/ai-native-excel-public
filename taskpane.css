@@ -167,11 +167,11 @@ body {
 }
 
 .card--functions {
-  background: #f1ede7;
+  background: var(--surface);
 }
 
 .card--functions::before {
-  display: none;
+  background: linear-gradient(140deg, rgba(42, 157, 143, 0.12), transparent 52%);
 }
 
 .card__header {
@@ -198,9 +198,9 @@ body {
 
 .usage-summary {
   display: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
-  color: var(--accent-3);
+  color: var(--accent-2);
   white-space: nowrap;
 }
 
@@ -217,9 +217,6 @@ body {
   margin-top: 0;
 }
 
-.card--usage.is-collapsed .card__subtitle {
-  display: none;
-}
 
 .card__title {
   font-family: "Space Grotesk", sans-serif;
@@ -391,6 +388,31 @@ body {
   font-weight: 600;
 }
 
+.input-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.input-action .input {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.icon-button--check {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 14px;
+  border-color: rgba(42, 157, 143, 0.35);
+  color: var(--accent-2);
+}
+
+.icon-button--check:hover {
+  border-color: rgba(42, 157, 143, 0.55);
+}
+
 .settings-block {
   display: flex;
   flex-direction: column;
@@ -409,6 +431,10 @@ body {
   letter-spacing: 0.08em;
   color: var(--muted);
   font-weight: 700;
+}
+
+.settings-block--intro {
+  margin-bottom: 12px;
 }
 
 .settings-block--actions .actions {
@@ -1663,9 +1689,10 @@ body {
   font-size: 12px;
   font-weight: 600;
   color: var(--accent-3);
-  background: transparent;
-  border: none;
-  padding: 0;
+  background: rgba(38, 70, 83, 0.06);
+  border: 1px solid rgba(38, 70, 83, 0.14);
+  border-radius: 8px;
+  padding: 6px 8px;
 }
 
 .function-item__fn {
@@ -1966,6 +1993,37 @@ body {
   gap: 8px;
   justify-content: flex-end;
   flex-wrap: wrap;
+}
+
+.toast {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  max-width: calc(100% - 32px);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(42, 157, 143, 0.4);
+  background: rgba(42, 157, 143, 0.12);
+  color: var(--accent-2);
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 80;
+}
+
+.toast--success {
+  border-color: rgba(42, 157, 143, 0.4);
+  background: rgba(42, 157, 143, 0.12);
+  color: var(--accent-2);
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .pricing-legend {

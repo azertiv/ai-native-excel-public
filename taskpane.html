@@ -60,7 +60,7 @@
                 <div class="setup-step__titles">
                   <div class="setup-step__title">Activer votre licence</div>
                 </div>
-                <div id="licenseKeyStatus" class="key-status">Aucune licence enregistrée</div>
+                <div id="licenseKeyStatus" class="key-status" data-license-status>Aucune licence enregistrée</div>
               </div>
               <div class="setup-step__content">
                 <div class="setup-license-switch segmented" role="tablist" aria-label="Choix de licence">
@@ -112,8 +112,11 @@
                         type="text"
                         placeholder="AAAA-BBBB-CCCC-DDDD"
                         spellcheck="false"
+                        data-license-input
                       />
-                      <button id="licenseActivateBtn" class="btn btn--primary" type="button">Activer</button>
+                      <button id="licenseActivateBtn" class="btn btn--primary" type="button" data-license-activate data-license-target="licenseKeyInput">
+                        Activer
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -132,20 +135,58 @@
                   <div class="setup-key-card">
                     <div class="setup-key-card__header">
                       <div class="setup-key-card__title">Clé API Gemini</div>
-                      <div id="geminiKeyStatus" class="key-status">Clé manquante</div>
+                      <div id="geminiKeyStatus" class="key-status" data-key-status="gemini">Clé manquante</div>
                     </div>
                     <div class="form-row">
-                      <input id="geminiKey" class="input" type="password" placeholder="AIza..." spellcheck="false" aria-label="Clé API Gemini" />
+                      <div class="input-action">
+                        <input
+                          id="geminiKey"
+                          class="input"
+                          type="password"
+                          placeholder="AIza..."
+                          spellcheck="false"
+                          aria-label="Clé API Gemini"
+                          data-key-input="gemini"
+                        />
+                        <button
+                          class="icon-button icon-button--check"
+                          type="button"
+                          data-key-save="gemini"
+                          data-key-confirm="true"
+                          aria-label="Valider la clé API Gemini"
+                        >
+                          &#10003;
+                        </button>
+                      </div>
                     </div>
                   </div>
 
                   <div class="setup-key-card">
                     <div class="setup-key-card__header">
                       <div class="setup-key-card__title">Clé API OpenAI</div>
-                      <div id="openaiKeyStatus" class="key-status">Clé manquante</div>
+                      <div id="openaiKeyStatus" class="key-status" data-key-status="openai">Clé manquante</div>
                     </div>
                     <div class="form-row">
-                      <input id="openaiKey" class="input" type="password" placeholder="sk-..." spellcheck="false" aria-label="Clé API OpenAI" />
+                      <div class="input-action">
+                        <input
+                          id="openaiKey"
+                          class="input"
+                          type="password"
+                          placeholder="sk-..."
+                          spellcheck="false"
+                          aria-label="Clé API OpenAI"
+                          data-key-input="openai"
+                        />
+                        <button
+                          class="icon-button icon-button--check"
+                          type="button"
+                          data-key-save="openai"
+                          data-key-confirm="true"
+                          aria-label="Valider la clé API OpenAI"
+                        >
+                          &#10003;
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -311,13 +352,13 @@
               <div class="card__subtitle">Gérez le cache local pour accélérer les réponses</div>
             </div>
             <div class="card__actions">
-              <div id="cacheStatus" class="chip chip--success">Actif</div>
               <span class="help" data-help>
                 <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide cache intelligent" aria-expanded="false">?</button>
                 <span class="help__popup" role="tooltip">
                   Stocke localement les réponses pour éviter des recalculs inutiles · Réduit la latence et le coût · Vous pouvez le vider à tout moment
                 </span>
               </span>
+              <div id="cacheStatus" class="chip chip--success">Actif</div>
               <button
                 class="collapse-toggle"
                 type="button"
@@ -466,11 +507,36 @@
         <div class="modal__header">
           <div>
             <div id="settingsTitle" class="modal__title">Réglages</div>
-            <div class="modal__subtitle">Modèles et effort de raisonnement</div>
+            <div class="modal__subtitle">Clés API, licence, modèles et effort de raisonnement</div>
           </div>
           <button class="icon-button" type="button" data-settings-close aria-label="Fermer">x</button>
         </div>
         <div class="modal__body">
+          <div class="settings-block settings-block--intro">
+            <div class="settings-block__title">Licence</div>
+            <div class="form-row">
+              <div class="label-row">
+                <label for="settingsLicenseKey">Clé de licence</label>
+                <span class="key-status" data-license-status>Aucune licence enregistrée</span>
+              </div>
+              <div class="input-action">
+                <input
+                  id="settingsLicenseKey"
+                  class="input"
+                  type="text"
+                  placeholder="AAAA-BBBB-CCCC-DDDD"
+                  spellcheck="false"
+                  data-license-input
+                />
+                <button class="btn btn--primary" type="button" data-license-activate data-license-target="settingsLicenseKey">Activer</button>
+              </div>
+              <div class="hint" data-license-meta>Clé reçue par email après achat (mensuel ou annuel)</div>
+            </div>
+            <div class="actions actions--right">
+              <button class="btn btn--ghost" type="button" data-license-test data-license-target="settingsLicenseKey">Tester</button>
+              <button class="btn btn--danger" type="button" data-license-clear>Effacer</button>
+            </div>
+          </div>
           <div class="tabs" role="tablist" aria-label="Fournisseurs">
             <button id="tabGemini" class="tab tab--active" type="button" role="tab" aria-selected="true" aria-controls="panelGemini">
               Gemini
@@ -481,6 +547,39 @@
           </div>
 
           <div id="panelGemini" class="tab-panel tab-panel--active" role="tabpanel" aria-labelledby="tabGemini">
+            <div class="settings-block">
+              <div class="settings-block__title">Clé API</div>
+              <div class="form-row">
+                <div class="label-row">
+                  <label for="settingsGeminiKey">Clé API Gemini</label>
+                  <span class="key-status" data-key-status="gemini">Clé manquante</span>
+                </div>
+                <div class="input-action">
+                  <input
+                    id="settingsGeminiKey"
+                    class="input"
+                    type="password"
+                    placeholder="AIza..."
+                    spellcheck="false"
+                    aria-label="Clé API Gemini"
+                    data-key-input="gemini"
+                  />
+                  <button
+                    class="icon-button icon-button--check"
+                    type="button"
+                    data-key-save="gemini"
+                    aria-label="Valider la clé API Gemini"
+                  >
+                    &#10003;
+                  </button>
+                </div>
+                <div class="hint">Clé stockée localement sur cette machine</div>
+              </div>
+              <div class="actions actions--right">
+                <button id="clearGemini" class="btn btn--ghost" type="button">Effacer</button>
+                <button id="testGemini" class="btn btn--ghost" type="button">Tester</button>
+              </div>
+            </div>
             <div class="settings-block">
               <div class="settings-block__title">Modèles</div>
               <div class="form-row">
@@ -549,6 +648,39 @@
           </div>
 
           <div id="panelOpenAI" class="tab-panel" role="tabpanel" aria-labelledby="tabOpenAI">
+            <div class="settings-block">
+              <div class="settings-block__title">Clé API</div>
+              <div class="form-row">
+                <div class="label-row">
+                  <label for="settingsOpenAIKey">Clé API OpenAI</label>
+                  <span class="key-status" data-key-status="openai">Clé manquante</span>
+                </div>
+                <div class="input-action">
+                  <input
+                    id="settingsOpenAIKey"
+                    class="input"
+                    type="password"
+                    placeholder="sk-..."
+                    spellcheck="false"
+                    aria-label="Clé API OpenAI"
+                    data-key-input="openai"
+                  />
+                  <button
+                    class="icon-button icon-button--check"
+                    type="button"
+                    data-key-save="openai"
+                    aria-label="Valider la clé API OpenAI"
+                  >
+                    &#10003;
+                  </button>
+                </div>
+                <div class="hint">Clé stockée localement sur cette machine</div>
+              </div>
+              <div class="actions actions--right">
+                <button id="clearOpenAI" class="btn btn--ghost" type="button">Effacer</button>
+                <button id="testOpenAI" class="btn btn--ghost" type="button">Tester</button>
+              </div>
+            </div>
             <div class="settings-block">
               <div class="settings-block__title">Modèles</div>
               <div class="form-row">
@@ -739,6 +871,8 @@
         </div>
       </div>
     </div>
+
+    <div id="statusToast" class="toast toast--success" role="status" aria-live="polite"></div>
 
     <!-- Shared Runtime: functions.js is loaded into the same long-lived runtime as taskpane -->
     <script src="functions.js"></script>
