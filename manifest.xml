@@ -7,11 +7,11 @@
 
   <Id>4fcdfe40-a035-4d43-92e8-d0d0676ad445</Id>
   <Version>2.0.0.0</Version>
-  <ProviderName>AI.Native</ProviderName>
+  <ProviderName>Neurow</ProviderName>
   <DefaultLocale>fr-FR</DefaultLocale>
 
-  <DisplayName DefaultValue="AI.Native"/>
-  <Description DefaultValue="AI.Native : fonctions IA pour Excel via Google Gemini 3 Flash et OpenAI GPT-5 mini (sans backend)."/>
+  <DisplayName DefaultValue="Neurow"/>
+  <Description DefaultValue="Neurow : fonctions IA pour Excel via Google Gemini 3 Flash et OpenAI GPT-5 mini (sans backend)."/>
   <IconUrl DefaultValue="https://azertiv.github.io/ai-native-excel-public/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://azertiv.github.io/ai-native-excel-public/assets/icon-80.png"/>
 
@@ -104,12 +104,12 @@
         <bt:Url id="Functions.Metadata.Url" DefaultValue="https://azertiv.github.io/ai-native-excel-public/functions.json"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="CommandsGroup.Label" DefaultValue="AI.Native"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="AI.Native"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="Neurow"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Neurow"/>
         <bt:String id="Functions.Namespace" DefaultValue="AI"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Configurer AI.Native (Gemini / OpenAI) et consulter les diagnostics."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Configurer Neurow (Gemini / OpenAI) et consulter les diagnostics."/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

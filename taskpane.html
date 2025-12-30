@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI.Native</title>
+    <title>Neurow</title>
 
     <!-- Optional: Fabric for Office-like typography -->
     <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.3/fabric.min.css" />
@@ -18,10 +18,10 @@
     <div class="app">
       <header class="app__header">
         <div class="brand">
-          <div class="brand__mark">AI</div>
+          <div class="brand__mark">N</div>
           <div class="brand__text">
             <div class="brand__headline">
-              <div class="app__title">AI.Native</div>
+              <div class="app__title">Neurow</div>
               <div class="app__header-actions">
                 <button id="settingsButton" class="icon-button icon-button--gear" type="button" title="Réglages" aria-label="Ouvrir les réglages">
                   &#9881;
@@ -39,35 +39,140 @@
           data-key-alert
           type="button"
           role="alert"
-          title="Cliquez pour ajouter vos clés API"
+          title="Ouvrir Mise en route"
         >
-          Aucune clé API enregistrée · Cliquez ici pour ajouter vos clés
+          Aucune clé API enregistrée · Ouvrir Mise en route
         </button>
-        <section id="licenseBanner" class="card card--license is-hidden" aria-live="polite">
+        <section class="card card--license" data-collapsible data-section="onboarding" data-section-title="Mise en route">
           <div class="card__header">
             <div>
-              <div class="card__title">Activer votre licence</div>
-              <div class="card__subtitle">Entrez votre clé Lemon Squeezy (mensuel ou annuel)</div>
+              <div class="card__title">Mise en route</div>
+              <div class="card__subtitle">Activez votre licence et ajoutez vos clés API pour démarrer sur Neurow</div>
+            </div>
+            <div class="card__actions">
+              <button
+                class="collapse-toggle"
+                type="button"
+                data-collapse-toggle
+                aria-expanded="true"
+                aria-controls="onboardingBody"
+                title="Masquer"
+              >
+                <span class="chevron"></span>
+              </button>
             </div>
           </div>
-          <div class="card__body license-banner__body">
-            <div class="license-banner__row">
-              <input
-                id="licenseBannerInput"
-                class="input license-banner__input"
-                type="text"
-                placeholder="AAAA-BBBB-CCCC-DDDD"
-                aria-label="Clé de licence"
-                spellcheck="false"
-              />
-              <button id="licenseBannerActivate" class="btn btn--primary" type="button">Activer</button>
+          <div id="onboardingBody" class="card__body setup">
+            <div class="setup-step">
+              <div class="setup-step__header">
+                <span class="setup-step__badge">1</span>
+                <div class="setup-step__titles">
+                  <div class="setup-step__title">Activer votre licence</div>
+                  <div class="setup-step__subtitle">L'essai gratuit est limité à 5 formules par jour</div>
+                </div>
+                <div id="licenseKeyStatus" class="key-status">Aucune licence enregistrée</div>
+              </div>
+              <div class="setup-step__content">
+                <div class="setup-offer">
+                  <div class="setup-offer__headline">Passez en illimité</div>
+                  <div class="setup-offer__pricing">
+                    <span class="setup-pill setup-pill--accent">5,99 $/mois</span>
+                    <span class="setup-pill">59 $/an</span>
+                    <span class="setup-pill setup-pill--trial">Essai : 5 formules/jour</span>
+                  </div>
+                  <ul class="setup-offer__list">
+                    <li>Accès complet aux fonctions Neurow</li>
+                    <li>Usage illimité des formules</li>
+                    <li>Annulation à tout moment</li>
+                  </ul>
+                  <div class="setup-offer__actions">
+                    <a
+                      id="licenseCheckoutLink"
+                      class="btn btn--primary"
+                      href="https://neurow.lemonsqueezy.com/checkout/buy/e132080e-77c6-4fa7-bafa-98de45abe7d8?discount=0"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Acheter une licence
+                    </a>
+                    <button
+                      id="licenseRevealBtn"
+                      class="btn btn--ghost"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="licenseEntry"
+                    >
+                      J'ai déjà une licence
+                    </button>
+                  </div>
+                </div>
+
+                <div id="licenseEntry" class="setup-license is-hidden">
+                  <div class="form-row">
+                    <label for="licenseKeyInput">Clé de licence</label>
+                    <div class="setup-license__row">
+                      <input
+                        id="licenseKeyInput"
+                        class="input setup-license__input"
+                        type="text"
+                        placeholder="AAAA-BBBB-CCCC-DDDD"
+                        spellcheck="false"
+                      />
+                      <button id="licenseActivateBtn" class="btn btn--primary" type="button">Activer</button>
+                    </div>
+                  </div>
+                  <div class="setup-license__actions">
+                    <button id="licenseTestBtn" class="btn" type="button">Tester</button>
+                    <button id="licenseClearBtn" class="btn btn--ghost" type="button">Effacer</button>
+                  </div>
+                  <div id="licenseKeyMeta" class="hint">Clé reçue par email après achat (mensuel ou annuel)</div>
+                </div>
+              </div>
             </div>
-            <div id="licenseBannerStatus" class="key-status key-status--missing">Aucune licence enregistrée</div>
-            <div class="license-banner__footer">
-              <span>Pas encore de licence ?</span>
-              <a id="licenseCheckoutLinkBanner" href="https://neurow.lemonsqueezy.com/buy/..." target="_blank" rel="noreferrer">
-                Souscrire
-              </a>
+
+            <div class="setup-step">
+              <div class="setup-step__header">
+                <span class="setup-step__badge">2</span>
+                <div class="setup-step__titles">
+                  <div class="setup-step__title">Ajouter une API key Gemini ou OpenAI</div>
+                  <div class="setup-step__subtitle">Les clés sont stockées localement sur cette machine</div>
+                </div>
+              </div>
+              <div class="setup-step__content">
+                <div class="setup-keys">
+                  <div class="setup-key-card">
+                    <div class="setup-key-card__header">
+                      <div class="setup-key-card__title">Gemini</div>
+                      <div id="geminiKeyStatus" class="key-status">Clé manquante</div>
+                    </div>
+                    <div class="form-row">
+                      <label for="geminiKey">Clé API Gemini</label>
+                      <input id="geminiKey" class="input" type="password" placeholder="AIza..." spellcheck="false" />
+                      <div class="hint">Générée dans votre console Google</div>
+                    </div>
+                    <div class="actions">
+                      <button id="testGemini" class="btn" type="button">Tester</button>
+                      <button id="clearGemini" class="btn btn--ghost" type="button">Effacer</button>
+                    </div>
+                  </div>
+
+                  <div class="setup-key-card">
+                    <div class="setup-key-card__header">
+                      <div class="setup-key-card__title">OpenAI</div>
+                      <div id="openaiKeyStatus" class="key-status">Clé manquante</div>
+                    </div>
+                    <div class="form-row">
+                      <label for="openaiKey">Clé API OpenAI</label>
+                      <input id="openaiKey" class="input" type="password" placeholder="sk-..." spellcheck="false" />
+                      <div class="hint">Disponible sur platform.openai.com</div>
+                    </div>
+                    <div class="actions">
+                      <button id="testOpenAI" class="btn" type="button">Tester</button>
+                      <button id="clearOpenAI" class="btn btn--ghost" type="button">Effacer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -263,10 +368,10 @@
           </div>
         </section>
 
-        <section class="card card--functions is-collapsed" data-collapsible data-section="functions" data-section-title="Fonctions AI.Native">
+        <section class="card card--functions is-collapsed" data-collapsible data-section="functions" data-section-title="Fonctions Neurow">
           <div class="card__header">
             <div>
-              <div class="card__title">Fonctions AI.Native</div>
+              <div class="card__title">Fonctions Neurow</div>
               <div class="card__subtitle">Retrouvez les fonctions prêtes à l'emploi dans Excel</div>
             </div>
             <div class="card__actions">
@@ -375,7 +480,7 @@
         <div class="modal__header">
           <div>
             <div id="settingsTitle" class="modal__title">Réglages</div>
-            <div class="modal__subtitle">Modèles, raisonnement et clés API</div>
+            <div class="modal__subtitle">Modèles et effort de raisonnement</div>
           </div>
           <button class="icon-button" type="button" data-settings-close aria-label="Fermer">x</button>
         </div>
@@ -451,30 +556,6 @@
               </div>
             </div>
 
-            <div class="settings-block">
-              <div class="settings-block__title">Clé API</div>
-              <div class="form-row">
-                <div class="label-row">
-                  <label for="geminiKey">Clé API Gemini</label>
-                  <span class="help" data-help>
-                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé Gemini" aria-expanded="false">?</button>
-                    <span class="help__popup" role="tooltip">
-                      Clé requise pour appeler Gemini · À créer dans votre console Google, stockée localement sur cette machine
-                    </span>
-                  </span>
-                </div>
-                <input id="geminiKey" class="input" type="password" placeholder="AIza..." spellcheck="false" />
-                <div id="geminiKeyStatus" class="key-status">Clé inconnue</div>
-              </div>
-            </div>
-
-            <div class="settings-block settings-block--actions">
-              <div class="settings-block__title">Configuration</div>
-              <div class="actions">
-                <button id="clearGemini" class="btn" type="button">Effacer</button>
-                <button id="testGemini" class="btn" type="button">Tester</button>
-              </div>
-            </div>
           </div>
 
           <div id="panelOpenAI" class="tab-panel" role="tabpanel" aria-labelledby="tabOpenAI">
@@ -539,60 +620,6 @@
               </div>
             </div>
 
-            <div class="settings-block">
-              <div class="settings-block__title">Clé API</div>
-              <div class="form-row">
-                <div class="label-row">
-                  <label for="openaiKey">Clé API OpenAI</label>
-                  <span class="help" data-help>
-                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé OpenAI" aria-expanded="false">?</button>
-                    <span class="help__popup" role="tooltip">
-                      Clé requise pour appeler OpenAI · À créer sur platform.openai.com, stockée localement sur cette machine
-                    </span>
-                  </span>
-                </div>
-                <input id="openaiKey" class="input" type="password" placeholder="sk-..." spellcheck="false" />
-                <div id="openaiKeyStatus" class="key-status">Clé inconnue</div>
-                <div class="hint">Important : aucune température n'est envoyée (GPT-5 Mini la rejette)</div>
-              </div>
-            </div>
-
-            <div class="settings-block settings-block--actions">
-              <div class="settings-block__title">Configuration</div>
-              <div class="actions">
-                <button id="clearOpenAI" class="btn" type="button">Effacer</button>
-                <button id="testOpenAI" class="btn" type="button">Tester</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="settings-block">
-            <div class="settings-block__title">Licence</div>
-            <div class="form-row">
-              <div class="label-row">
-                <label for="licenseKeyInput">Clé de licence</label>
-                <span class="help" data-help>
-                  <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé de licence" aria-expanded="false">?</button>
-                  <span class="help__popup" role="tooltip">
-                    Clé reçue par email après achat Lemon Squeezy · Mensuel ou annuel
-                  </span>
-                </span>
-              </div>
-              <input id="licenseKeyInput" class="input" type="text" placeholder="AAAA-BBBB-CCCC-DDDD" spellcheck="false" />
-              <div id="licenseKeyStatus" class="key-status">Aucune licence enregistrée</div>
-              <div id="licenseKeyMeta" class="hint">Clé reçue par email après achat (mensuel ou annuel)</div>
-            </div>
-            <div class="actions">
-              <button id="licenseActivateBtn" class="btn btn--primary" type="button">Activer</button>
-              <button id="licenseTestBtn" class="btn" type="button">Tester</button>
-              <button id="licenseClearBtn" class="btn btn--ghost" type="button">Effacer</button>
-            </div>
-            <div class="hint">
-              Pas encore de licence ?
-              <a id="licenseCheckoutLinkSettings" href="https://neurow.lemonsqueezy.com/buy/..." target="_blank" rel="noreferrer">
-                Souscrire
-              </a>
-            </div>
           </div>
 
           <div class="status" aria-live="polite">
@@ -612,7 +639,7 @@
       <div class="modal__panel" role="document">
         <div class="modal__header">
             <div>
-              <div id="onboardingTitle" class="modal__title">Bienvenue dans AI.Native</div>
+              <div id="onboardingTitle" class="modal__title">Bienvenue dans Neurow</div>
               <div class="modal__subtitle">Configurez l'extension en quelques secondes</div>
             </div>
           <button id="onboardingClose" class="icon-button" type="button" aria-label="Fermer">x</button>
@@ -620,21 +647,21 @@
         <div class="modal__body onboarding">
           <div class="onboarding__steps">
             <div class="onboarding-step">
-              <div class="onboarding-step__title">1. Ajoutez vos clés API</div>
-              <div class="onboarding-step__text">Entrez une clé Gemini et/ou OpenAI pour activer les fonctions</div>
+              <div class="onboarding-step__title">1. Activez votre licence</div>
+              <div class="onboarding-step__text">Essai gratuit : 5 formules/jour · Abonnement : 5,99 $/mois ou 59 $/an</div>
             </div>
             <div class="onboarding-step">
-              <div class="onboarding-step__title">2. Choisissez vos modèles</div>
-              <div class="onboarding-step__text">Sélectionnez un modèle adapté au coût et au niveau de raisonnement</div>
+              <div class="onboarding-step__title">2. Ajoutez vos clés API</div>
+              <div class="onboarding-step__text">Entrez une clé Gemini et/ou OpenAI pour activer Neurow</div>
             </div>
             <div class="onboarding-step">
-              <div class="onboarding-step__title">3. Lancez vos formules</div>
-              <div class="onboarding-step__text">Utilisez les fonctions AI.Native directement dans Excel</div>
+              <div class="onboarding-step__title">3. Choisissez vos modèles</div>
+              <div class="onboarding-step__text">Sélectionnez un modèle et lancez vos formules Neurow dans Excel</div>
             </div>
           </div>
 
           <div class="onboarding__actions">
-            <button id="onboardingKeysButton" class="btn btn--ghost" type="button">Configurer mes clés</button>
+            <button id="onboardingKeysButton" class="btn btn--ghost" type="button">Ouvrir Mise en route</button>
             <button id="onboardingDone" class="btn btn--primary" type="button">C'est parti</button>
           </div>
         </div>
