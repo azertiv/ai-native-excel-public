@@ -1410,6 +1410,12 @@ body {
   color: var(--accent-2);
 }
 
+.chip--muted {
+  background: rgba(38, 70, 83, 0.08);
+  border-color: rgba(38, 70, 83, 0.25);
+  color: var(--muted);
+}
+
 .pill {
   display: inline-flex;
   align-items: center;
@@ -2004,6 +2010,22 @@ body {
 .visibility-toggle input:disabled + .visibility-toggle__slider {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.privacy-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.privacy-toggle__status {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.privacy-toggle__status.is-active {
+  color: var(--accent-2);
 }
 
 .section-row__lock {

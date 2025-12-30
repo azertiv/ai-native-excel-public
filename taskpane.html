@@ -96,7 +96,7 @@
                       class="btn btn--primary"
                       href="https://neurow.lemonsqueezy.com/checkout/buy/e132080e-77c6-4fa7-bafa-98de45abe7d8?discount=0"
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       S'abonner
                     </a>
@@ -774,6 +774,34 @@
                     <div class="hint">Docs : low/medium/high · Autres valeurs peuvent échouer</div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-panel">
+            <div class="settings-panel__header">
+              <div class="settings-panel__title">Confidentialité</div>
+              <div class="settings-panel__subtitle">Journal et cache persistants</div>
+            </div>
+            <div class="settings-panel__body">
+              <div class="form-row">
+                <div class="label-row">
+                  <label for="privacyModeToggle">Mode confidentialité</label>
+                  <span class="help" data-help>
+                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide mode confidentialité" aria-expanded="false">?</button>
+                    <span class="help__popup" role="tooltip">
+                      Désactive l'enregistrement persistant du journal et du cache · À l'activation, le cache et le journal existants sont vidés
+                    </span>
+                  </span>
+                </div>
+                <div class="privacy-toggle">
+                  <label class="visibility-toggle">
+                    <input id="privacyModeToggle" type="checkbox" />
+                    <span class="visibility-toggle__slider"></span>
+                  </label>
+                  <span id="privacyModeStatus" class="privacy-toggle__status">Désactivé</span>
+                </div>
+                <div id="privacyModeHint" class="hint">Journal et cache persistants activés.</div>
               </div>
             </div>
           </div>
