@@ -86,17 +86,21 @@ body {
 .brand__mark {
   width: 46px;
   height: 46px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--accent), #f4a261);
-  color: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(38, 70, 83, 0.12);
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Space Grotesk", sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.04em;
   box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.brand__logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .brand__text {
@@ -368,6 +372,10 @@ body {
   gap: 6px;
 }
 
+.modal__body.modal__body--settings .form-row {
+  gap: 4px;
+}
+
 .form-row--full {
   grid-column: 1 / -1;
 }
@@ -416,23 +424,23 @@ body {
 .settings-block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 10px;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(38, 70, 83, 0.12);
-  background: rgba(255, 255, 255, 0.85);
+  gap: 6px;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
 }
 
 .settings-block + .settings-block {
-  margin-top: 10px;
-  padding-top: 0;
-  border-top: none;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(38, 70, 83, 0.12);
 }
 
 .settings-block__title {
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--muted);
   font-weight: 700;
   display: flex;
@@ -441,34 +449,40 @@ body {
 }
 
 .settings-block__title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: rgba(38, 70, 83, 0.12);
+  content: none;
 }
 
 .settings-block--intro {
   margin-bottom: 0;
-  border-color: rgba(231, 111, 81, 0.25);
 }
 
 .settings-block--actions .actions {
   margin-top: 0;
 }
 
+.modal__body.modal__body--settings .actions {
+  margin-top: 4px;
+}
+
 .modal__body.modal__body--settings {
-  gap: 14px;
+  gap: 10px;
 }
 
 .settings-panel {
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.7);
-  padding: 12px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: var(--shadow-soft);
+  gap: 8px;
+  box-shadow: none;
+}
+
+.settings-panel + .settings-panel {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(38, 70, 83, 0.12);
 }
 
 .settings-panel__header {
@@ -495,7 +509,7 @@ body {
 .settings-panel__body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .segmented {
@@ -804,6 +818,18 @@ body {
   position: relative;
 }
 
+#configProviderGate {
+  font-size: 10px;
+  padding: 4px 22px 4px 6px;
+  line-height: 1.2;
+}
+
+#configProviderGate .inline-alert__arrow {
+  top: 4px;
+  right: 6px;
+  font-size: 10px;
+}
+
 .inline-alert .text-button {
   font-size: 11px;
   padding: 0;
@@ -914,13 +940,13 @@ body {
 }
 
 .setup-offer {
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(38, 70, 83, 0.12);
-  background: rgba(255, 255, 255, 0.9);
-  padding: 12px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .setup-offer__headline {
@@ -937,16 +963,18 @@ body {
 .setup-offer__plans {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 
 .setup-plan {
+  position: relative;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: var(--surface-2);
   padding: 10px;
   text-align: center;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 4px;
 }
 
@@ -960,9 +988,11 @@ body {
 
 .setup-plan__price {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
+  justify-content: center;
+  line-height: 1.1;
 }
 
 .setup-plan__amount {
@@ -977,15 +1007,19 @@ body {
 }
 
 .setup-plan__badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
   border-radius: 999px;
   border: 1px solid rgba(42, 157, 143, 0.35);
   background: rgba(42, 157, 143, 0.12);
   color: var(--accent-2);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  padding: 4px 8px;
+  padding: 2px 6px;
   justify-self: center;
+  line-height: 1;
 }
 
 .setup-plan--annual {
@@ -1248,11 +1282,11 @@ body {
 
 .tab-panel {
   display: none;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(38, 70, 83, 0.12);
-  background: rgba(255, 255, 255, 0.6);
+  margin-top: 8px;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
 }
 
 .tab-panel--active {
