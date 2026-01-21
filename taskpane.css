@@ -208,6 +208,10 @@ body {
   white-space: nowrap;
 }
 
+.usage-reset {
+  white-space: nowrap;
+}
+
 .card--usage.is-collapsed .usage-summary {
   display: inline-flex;
 }
