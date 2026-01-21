@@ -274,6 +274,28 @@
                   </div>
                 </div>
               </div>
+              <div class="form-row form-row--full">
+                <div class="label-row">
+                  <label for="concurrencyRange">Concurrence requêtes</label>
+                  <span class="help" data-help>
+                    <button
+                      class="icon-button icon-button--tiny help__button"
+                      type="button"
+                      aria-label="Aide concurrence"
+                      aria-expanded="false"
+                    >?</button>
+                    <span class="help__popup" role="tooltip">
+                      Nombre de requetes traitees en parallele. Plus haut = plus rapide, mais davantage de charge et de risque de limites API.
+                    </span>
+                  </span>
+                </div>
+                <div class="range">
+                  <input id="concurrencyRange" class="range__input" type="range" min="0" max="3" step="1" value="0" />
+                  <div class="range__value">
+                    <span id="concurrencyValue">4</span> requetes
+                  </div>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -815,6 +837,13 @@
               <div class="status" aria-live="polite">
                 <div id="statusLine" class="status__line">Chargement…</div>
                 <div class="status__meta">Stockage : <span id="storageBackend">?</span></div>
+                <div id="queueStatus" class="queue-status is-hidden">
+                  <span class="queue-status__spinner" aria-hidden="true"></span>
+                  <span id="queueStatusText" class="queue-status__text"></span>
+                  <button id="queueStop" class="btn btn--ghost queue-status__stop is-hidden" type="button" title="Arreter la file d'attente">
+                    Stop
+                  </button>
+                </div>
                 <details class="status__details">
                   <summary>Détails</summary>
                   <pre id="statusDetails" class="status__pre"></pre>
