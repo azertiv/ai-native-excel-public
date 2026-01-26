@@ -378,6 +378,12 @@
 
           <div id="logsBody" class="card__body">
             <div class="log">
+              <div class="log__header">
+                <div class="log__title">Filtrer</div>
+                <div class="log__filters">
+                  <button id="logFilterErrors" class="tag tag--filter" type="button" aria-pressed="false" title="Afficher uniquement les erreurs">Erreurs</button>
+                </div>
+              </div>
               <div id="logList" class="log__list"></div>
             </div>
           </div>
@@ -837,13 +843,6 @@
               <div class="status" aria-live="polite">
                 <div id="statusLine" class="status__line">Chargement…</div>
                 <div class="status__meta">Stockage : <span id="storageBackend">?</span></div>
-                <div id="queueStatus" class="queue-status is-hidden">
-                  <span class="queue-status__spinner" aria-hidden="true"></span>
-                  <span id="queueStatusText" class="queue-status__text"></span>
-                  <button id="queueStop" class="btn btn--ghost queue-status__stop is-hidden" type="button" title="Arreter la file d'attente">
-                    Stop
-                  </button>
-                </div>
                 <details class="status__details">
                   <summary>Détails</summary>
                   <pre id="statusDetails" class="status__pre"></pre>
@@ -851,6 +850,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -965,6 +965,20 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div id="queueStatus" class="queue-status is-hidden" aria-live="polite">
+      <span class="queue-status__spinner" aria-hidden="true"></span>
+      <span id="queueStatusText" class="queue-status__text"></span>
+      <button
+        id="queueStop"
+        class="queue-status__stop is-hidden"
+        type="button"
+        title="Arreter la file d'attente"
+        aria-label="Arreter la file d'attente"
+      >
+        <span class="queue-status__stop-icon" aria-hidden="true"></span>
+      </button>
     </div>
 
     <div id="statusToast" class="toast toast--success" role="status" aria-live="polite"></div>
