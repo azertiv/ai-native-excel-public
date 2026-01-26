@@ -62,7 +62,7 @@
                 <div class="setup-step__titles">
                   <div class="setup-step__title">Activer votre licence</div>
                 </div>
-                <div id="licenseKeyStatus" class="key-status" data-license-status>Aucune licence enregistrée</div>
+                <div id="licenseKeyStatus" class="key-status key-status--compact key-status--missing" data-license-status>Aucune licence enregistrée</div>
               </div>
               <div class="setup-step__content">
                 <div class="setup-license-switch segmented" role="tablist" aria-label="Choix de licence">
@@ -207,9 +207,10 @@
           <div class="card__header">
             <div>
               <div class="card__title">Configuration</div>
-              <div class="card__subtitle">Si vous n'avez pas le résultat attendu, changez de modèle ou augmentez l'effort de raisonnement.</div>
+              <div class="card__subtitle">Modèle, effort et tokens.</div>
             </div>
             <div class="card__actions">
+              <span id="configProviderBadge" class="tag tag--provider" aria-label="Fournisseur sélectionné">—</span>
               <button id="pricingHelp" class="icon-button" type="button" title="Détails des coûts" aria-label="Voir les détails des coûts">?</button>
               <button
                 class="collapse-toggle"
@@ -296,6 +297,29 @@
                   </div>
                 </div>
               </div>
+
+              <div class="form-row form-row--full">
+                <div class="label-row">
+                  <label for="rpmLimitInput">Limite RPM</label>
+                  <span class="help" data-help>
+                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide limite RPM" aria-expanded="false">?</button>
+                    <span class="help__popup" role="tooltip">
+                      Nombre maximum de requetes par minute (global). 0 = illimit&eacute;.
+                    </span>
+                  </span>
+                </div>
+                <input
+                  id="rpmLimitInput"
+                  class="input"
+                  type="number"
+                  min="0"
+                  max="100000"
+                  step="1"
+                  inputmode="numeric"
+                  placeholder="0"
+                />
+                <div class="hint">0 = illimit&eacute; &middot; Fen&ecirc;tre glissante de 60 secondes.</div>
+              </div>
             </div>
 
           </div>
@@ -305,11 +329,13 @@
           <div class="card__header">
             <div>
               <div class="card__title">Utilisation</div>
-              <div class="card__subtitle">Suivez les tokens et les coûts estimés par fournisseur</div>
+              <div class="card__subtitle">Suivi des tokens et estimation de coûts</div>
             </div>
             <div class="card__actions">
-              <div id="usageSummary" class="usage-summary" title="Coût estimé total">€0.0000</div>
-              <button id="clearUsageTotals" class="btn btn--ghost usage-reset" type="button" title="Réinitialiser les totaux">Réinitialiser</button>
+              <div id="usageSummary" class="usage-summary" title="Coût estimé total">0,00€</div>
+              <button id="clearUsageTotals" class="icon-button usage-reset" type="button" title="Réinitialiser les totaux" aria-label="Réinitialiser les totaux">
+                &#8634;
+              </button>
               <button
                 class="collapse-toggle"
                 type="button"
@@ -328,13 +354,24 @@
               <div class="stat">
                 <div class="stat__label">Tokens totaux</div>
                 <div id="usageTokensTotal" class="stat__value">0</div>
-                <div class="stat__meta">
-                  <span id="usageTokensInTotal">0</span> entrée · <span id="usageTokensReasoningTotal">0</span> raisonnement · <span id="usageTokensOutTotal">0</span> sortie
+                <div class="stat__meta stat__meta--stack">
+                  <div class="stat__meta-line">
+                    <span class="stat__meta-label">in</span>
+                    <span id="usageTokensInTotal">0</span>
+                  </div>
+                  <div class="stat__meta-line">
+                    <span class="stat__meta-label">out</span>
+                    <span id="usageTokensOutTotal">0</span>
+                  </div>
+                  <div class="stat__meta-line">
+                    <span class="stat__meta-label">ref</span>
+                    <span id="usageTokensReasoningTotal">0</span>
+                  </div>
                 </div>
               </div>
               <div class="stat stat--accent">
                 <div class="stat__label">Coût estimé total</div>
-                <div id="usageCostTotal" class="stat__value">€0.0000</div>
+                <div id="usageCostTotal" class="stat__value">0,00€</div>
                 <div class="stat__meta">
                   Gemini <span id="usageCostGemini">€0.0000</span> · OpenAI <span id="usageCostOpenAI">€0.0000</span>
                 </div>
@@ -359,10 +396,12 @@
           <div class="card__header">
             <div>
             <div class="card__title">Logs</div>
-              <div class="card__subtitle">Consultez l'historique des appels et erreurs récentes</div>
+              <div class="card__subtitle">Historique et erreurs</div>
             </div>
             <div class="card__actions">
-              <button id="clearLogs" class="btn btn--ghost" type="button">Effacer</button>
+              <button id="clearLogs" class="icon-button" type="button" title="Effacer les logs" aria-label="Effacer les logs">
+                &#128465;
+              </button>
               <button
                 class="collapse-toggle"
                 type="button"
