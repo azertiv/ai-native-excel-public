@@ -1790,6 +1790,11 @@ body {
   background: rgba(38, 70, 83, 0.04);
 }
 
+.log-item--batch {
+  border-color: rgba(231, 111, 81, 0.55);
+  background: linear-gradient(90deg, rgba(231, 111, 81, 0.08), rgba(231, 111, 81, 0.02));
+}
+
 .log-item__top {
   display: flex;
   align-items: center;
