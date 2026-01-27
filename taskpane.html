@@ -298,28 +298,6 @@
                 </div>
               </div>
 
-              <div class="form-row form-row--full">
-                <div class="label-row">
-                  <label for="rpmLimitInput">Limite RPM</label>
-                  <span class="help" data-help>
-                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide limite RPM" aria-expanded="false">?</button>
-                    <span class="help__popup" role="tooltip">
-                      Nombre maximum de requetes par minute (global). 0 = illimit&eacute;.
-                    </span>
-                  </span>
-                </div>
-                <input
-                  id="rpmLimitInput"
-                  class="input"
-                  type="number"
-                  min="0"
-                  max="100000"
-                  step="1"
-                  inputmode="numeric"
-                  placeholder="0"
-                />
-                <div class="hint">0 = illimit&eacute; &middot; Fen&ecirc;tre glissante de 60 secondes.</div>
-              </div>
             </div>
 
           </div>
@@ -848,6 +826,37 @@
 
           <div class="settings-panel">
             <div class="settings-panel__header">
+              <div class="settings-panel__title">Performance</div>
+              <div class="settings-panel__subtitle">Limites d'appels et file d'attente</div>
+            </div>
+            <div class="settings-panel__body">
+              <div class="form-row">
+                <div class="label-row">
+                  <label for="rpmLimitInput">Limite RPM</label>
+                  <span class="help" data-help>
+                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide limite RPM" aria-expanded="false">?</button>
+                    <span class="help__popup" role="tooltip">
+                      Nombre maximum de requetes par minute (global). 0 = illimit&eacute;.
+                    </span>
+                  </span>
+                </div>
+                <input
+                  id="rpmLimitInput"
+                  class="input"
+                  type="number"
+                  min="0"
+                  max="100000"
+                  step="1"
+                  inputmode="numeric"
+                  placeholder="0"
+                />
+                <div class="hint">0 = illimit&eacute; &middot; Fen&ecirc;tre glissante de 60 secondes.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-panel">
+            <div class="settings-panel__header">
               <div class="settings-panel__title">Confidentialité</div>
               <div class="settings-panel__subtitle">Journal et cache persistants</div>
             </div>
@@ -1007,17 +1016,22 @@
     </div>
 
     <div id="queueStatus" class="queue-status is-hidden" aria-live="polite">
-      <span class="queue-status__spinner" aria-hidden="true"></span>
-      <span id="queueStatusText" class="queue-status__text"></span>
-      <button
-        id="queueStop"
-        class="queue-status__stop is-hidden"
-        type="button"
-        title="Arreter la file d'attente"
-        aria-label="Arreter la file d'attente"
-      >
-        <span class="queue-status__stop-icon" aria-hidden="true"></span>
-      </button>
+      <div id="queueStatusMain" class="queue-pill">
+        <span class="queue-status__spinner" aria-hidden="true"></span>
+        <span id="queueStatusText" class="queue-status__text"></span>
+        <button
+          id="queueStop"
+          class="queue-status__stop is-hidden"
+          type="button"
+          title="Arreter la file d'attente"
+          aria-label="Arreter la file d'attente"
+        >
+          <span class="queue-status__stop-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div id="rpmStatus" class="queue-pill queue-pill--rpm is-hidden">
+        <span id="rpmStatusText" class="queue-status__text"></span>
+      </div>
     </div>
 
     <div id="statusToast" class="toast toast--success" role="status" aria-live="polite"></div>

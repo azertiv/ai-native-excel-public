@@ -1351,6 +1351,19 @@ body {
   left: 50%;
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100% - 32px);
+  white-space: nowrap;
+  z-index: 70;
+}
+
+.queue-status.is-hidden {
+  display: none;
+}
+
+.queue-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1362,15 +1375,17 @@ body {
   font-size: 12px;
   color: var(--accent-3);
   font-weight: 600;
-  max-width: calc(100% - 32px);
-  white-space: nowrap;
-  z-index: 70;
 }
 
-.queue-status.is-hidden {
+.queue-pill.is-hidden {
   display: none;
 }
 
+.queue-pill--rpm {
+  padding: 6px 10px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
 
 .queue-status__spinner {
   width: 12px;
