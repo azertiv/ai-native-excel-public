@@ -26,6 +26,30 @@
       }
     },
     {
+      "id": "AI.BATCH",
+      "name": "BATCH",
+      "description": "Pose une question à l'IA en séparant un prompt fixe (mis en cache Gemini) et un contexte variable.",
+      "parameters": [
+        {
+          "name": "prompt",
+          "description": "Prompt fixe mis en cache.",
+          "type": "string",
+          "dimensionality": "scalar"
+        },
+        {
+          "name": "contextRange",
+          "description": "Contexte variable (cellule ou plage).",
+          "type": "any",
+          "dimensionality": "matrix",
+          "optional": true
+        }
+      ],
+      "result": {
+        "type": "string",
+        "dimensionality": "scalar"
+      }
+    },
+    {
       "id": "AI.WEB",
       "name": "WEB",
       "description": "Targeted factual lookup with optional entity focus and source hyperlink (returns an error or justification when data is not fully confirmed).",
