@@ -23,6 +23,7 @@
     <AppDomain>https://generativelanguage.googleapis.com</AppDomain>
     <AppDomain>https://api.openai.com</AppDomain>
     <AppDomain>https://openai.com</AppDomain>
+    <AppDomain>https://api.lemonsqueezy.com</AppDomain>
   </AppDomains>
 
   <Hosts>
