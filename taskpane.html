@@ -406,6 +406,34 @@
           </div>
         </section>
 
+        <section class="card card--gemini-explicit is-collapsed" data-collapsible data-section="gemini-explicit" data-section-title="Cache explicite (Gemini)">
+          <div class="card__header">
+            <div>
+              <div class="card__title">Cache explicite (Gemini)</div>
+              <div class="card__subtitle">Caches actifs et réutilisables</div>
+            </div>
+            <div class="card__actions">
+              <button id="refreshGeminiExplicit" class="btn btn--ghost" type="button">Actualiser</button>
+              <button
+                class="collapse-toggle"
+                type="button"
+                data-collapse-toggle
+                aria-expanded="false"
+                aria-controls="geminiExplicitBody"
+                title="Masquer"
+              >
+                <span class="chevron"></span>
+              </button>
+            </div>
+          </div>
+
+          <div id="geminiExplicitBody" class="card__body">
+            <div id="geminiExplicitSummary" class="explicit-cache__summary">0 cache</div>
+            <div id="geminiExplicitList" class="explicit-cache__list"></div>
+            <div id="geminiExplicitEmpty" class="explicit-cache__empty">Aucun cache explicite actif.</div>
+          </div>
+        </section>
+
         <section class="card card--cache is-collapsed" data-collapsible data-section="cache" data-section-title="Cache intelligent">
           <div class="card__header">
             <div>
