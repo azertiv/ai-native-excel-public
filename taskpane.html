@@ -635,21 +635,18 @@
             </div>
             <div class="settings-panel__body">
               <div id="settingsProvider" class="settings-provider" data-active-provider="gemini">
-                <div class="settings-provider__switch">
-                  <div class="tabs tabs--provider" role="tablist" aria-label="Fournisseurs">
-                    <button id="tabGemini" class="tab tab--active" type="button" role="tab" aria-selected="true" aria-controls="panelGemini">
-                      Gemini
-                    </button>
-                    <button id="tabOpenAI" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panelOpenAI">
-                      OpenAI
-                    </button>
-                  </div>
-                  <div id="settingsProviderNote" class="settings-provider__note">
-                    Réglages du fournisseur sélectionné : <strong id="settingsProviderName">Gemini</strong>
-                  </div>
+                <div class="tabs tabs--provider" role="tablist" aria-label="Fournisseurs">
+                  <button id="tabGemini" class="tab tab--active" type="button" role="tab" aria-selected="true" aria-controls="panelGemini">
+                    Gemini
+                  </button>
+                  <button id="tabOpenAI" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panelOpenAI">
+                    OpenAI
+                  </button>
                 </div>
-                <div class="settings-provider__panels">
-                  <div id="panelGemini" class="tab-panel tab-panel--active settings-provider__panel" role="tabpanel" aria-labelledby="tabGemini">
+                <div id="settingsProviderNote" class="settings-provider__note">
+                  Réglages du fournisseur sélectionné : <strong id="settingsProviderName">Gemini</strong>
+                </div>
+                <div id="panelGemini" class="tab-panel tab-panel--active settings-provider__panel" role="tabpanel" aria-labelledby="tabGemini">
                     <div class="settings-block">
                       <div class="settings-block__title">Clé API</div>
                       <div class="form-row">
@@ -742,9 +739,9 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                </div>
 
-                  <div id="panelOpenAI" class="tab-panel settings-provider__panel" role="tabpanel" aria-labelledby="tabOpenAI">
+                <div id="panelOpenAI" class="tab-panel settings-provider__panel" role="tabpanel" aria-labelledby="tabOpenAI">
                     <div class="settings-block">
                       <div class="settings-block__title">Clé API</div>
                       <div class="form-row">
@@ -838,7 +835,6 @@
                         <div class="hint">Docs : low/medium/high · Autres valeurs peuvent échouer</div>
                       </div>
                     </div>
-                  </div>
                 </div>
               </div>
 
