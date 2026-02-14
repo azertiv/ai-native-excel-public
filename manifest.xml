@@ -33,7 +33,6 @@
   <Requirements>
     <Sets DefaultMinVersion="1.1">
       <Set Name="SharedRuntime" MinVersion="1.1"/>
-      <Set Name="CustomFunctionsRuntime" MinVersion="1.1"/>
     </Sets>
   </Requirements>
 
@@ -47,7 +46,7 @@
     <Hosts>
       <Host xsi:type="Workbook">
         <Runtimes>
-          <Runtime resid="Taskpane.Url" lifetime="long"/>
+          <Runtime resid="Shared.Url" lifetime="long"/>
         </Runtimes>
         <AllFormFactors>
           <ExtensionPoint xsi:type="CustomFunctions">
@@ -55,13 +54,16 @@
               <SourceLocation resid="Functions.Url"/>
             </Script>
             <Page>
-              <SourceLocation resid="Taskpane.Url"/>
+              <SourceLocation resid="Shared.Url"/>
             </Page>
             <Metadata>
               <SourceLocation resid="Functions.Metadata.Url"/>
             </Metadata>
             <Namespace resid="Functions.Namespace"/>
           </ExtensionPoint>
+        </AllFormFactors>
+        <DesktopFormFactor>
+          <FunctionFile resid="Shared.Url"/>
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="CommandsGroup">
@@ -84,13 +86,13 @@
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ButtonTaskpane</TaskpaneId>
-                    <SourceLocation resid="Taskpane.Url"/>
+                    <SourceLocation resid="Shared.Url"/>
                   </Action>
                 </Control>
               </Group>
             </OfficeTab>
           </ExtensionPoint>
-        </AllFormFactors>
+        </DesktopFormFactor>
       </Host>
     </Hosts>
     <Resources>
@@ -100,6 +102,7 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://azertiv.github.io/ai-native-excel-public/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
+        <bt:Url id="Shared.Url" DefaultValue="https://azertiv.github.io/ai-native-excel-public/taskpane.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://azertiv.github.io/ai-native-excel-public/taskpane.html"/>
         <bt:Url id="Functions.Url" DefaultValue="https://azertiv.github.io/ai-native-excel-public/functions.js"/>
         <bt:Url id="Functions.Metadata.Url" DefaultValue="https://azertiv.github.io/ai-native-excel-public/functions.json"/>
