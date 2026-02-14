@@ -494,8 +494,6 @@ body {
 }
 
 .settings-panel {
-  position: relative;
-  isolation: isolate;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.92);
@@ -506,40 +504,10 @@ body {
   box-shadow: var(--shadow-soft);
 }
 
-.settings-panel::before {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 16px;
-  background: transparent;
-  z-index: -1;
-  pointer-events: none;
-}
-
 .settings-panel + .settings-panel {
   margin-top: 10px;
   padding-top: 0;
   border-top: none;
-}
-
-.settings-panel--mode::before {
-  background: linear-gradient(160deg, rgba(42, 157, 143, 0.2), rgba(42, 157, 143, 0.06));
-}
-
-.settings-panel--license::before {
-  background: linear-gradient(160deg, rgba(231, 111, 81, 0.2), rgba(231, 111, 81, 0.06));
-}
-
-.settings-panel--providers::before {
-  background: linear-gradient(160deg, rgba(38, 70, 83, 0.18), rgba(38, 70, 83, 0.05));
-}
-
-.settings-panel--performance::before {
-  background: linear-gradient(160deg, rgba(201, 122, 74, 0.2), rgba(201, 122, 74, 0.06));
-}
-
-.settings-panel--privacy::before {
-  background: linear-gradient(160deg, rgba(42, 157, 143, 0.2), rgba(42, 157, 143, 0.06));
 }
 
 .settings-panel__header {
