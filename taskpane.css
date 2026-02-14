@@ -548,6 +548,16 @@ body {
   border-top: 1px dashed rgba(38, 70, 83, 0.12);
 }
 
+.settings-provider__provider-name {
+  display: none;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .settings-provider .tab-panel {
   margin-top: 0;
 }
@@ -2668,6 +2678,127 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+body.mode-simple .app__main {
+  padding: 8px;
+  gap: 8px;
+}
+
+body.mode-simple .card {
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+body.mode-simple .card__header {
+  margin-bottom: 6px;
+}
+
+body.mode-simple .card__title {
+  font-size: 15px;
+}
+
+body.mode-simple [data-section="logs"],
+body.mode-simple [data-section="gemini-explicit"],
+body.mode-simple [data-section="cache"],
+body.mode-simple [data-section="functions"],
+body.mode-simple .section-settings {
+  display: none !important;
+}
+
+body.mode-simple [data-section="config"] .card__actions #pricingHelp,
+body.mode-simple [data-section="config"] .card__actions .collapse-toggle,
+body.mode-simple [data-section="config"] .help,
+body.mode-simple [data-section="config"] #configProviderBadge,
+body.mode-simple #configConcurrencyRow {
+  display: none !important;
+}
+
+body.mode-simple [data-section="config"] .config-grid {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+body.mode-simple [data-section="config"] .favorite-icon {
+  display: none;
+}
+
+body.mode-simple [data-section="usage"] .card__actions #clearUsageTotals,
+body.mode-simple [data-section="usage"] .card__actions .collapse-toggle,
+body.mode-simple [data-section="usage"] .breakdown,
+body.mode-simple [data-section="usage"] .chart,
+body.mode-simple [data-section="usage"] .stat__meta {
+  display: none !important;
+}
+
+body.mode-simple [data-section="usage"] .stats-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+body.mode-simple [data-section="usage"] .stat {
+  padding: 10px;
+}
+
+body.mode-simple [data-section="usage"] .stat__value {
+  font-size: 18px;
+}
+
+body.mode-simple [data-section="onboarding"] .setup {
+  gap: 8px;
+}
+
+body.mode-simple [data-section="onboarding"] .setup-step {
+  gap: 8px;
+  padding: 10px;
+}
+
+body.mode-simple #queueStatus #rpmStatus {
+  display: none !important;
+}
+
+body.mode-simple #settingsModal .modal__body.modal__body--settings {
+  gap: 8px;
+}
+
+body.mode-simple #settingsModal .settings-panel {
+  gap: 8px;
+}
+
+body.mode-simple #settingsModal .settings-panel__subtitle,
+body.mode-simple #settingsModal .settings-block--advanced,
+body.mode-simple #settingsModal .settings-panel--performance,
+body.mode-simple #settingsModal .settings-panel--privacy,
+body.mode-simple #settingsModal .settings-panel--status,
+body.mode-simple #settingsModal .help {
+  display: none !important;
+}
+
+body.mode-simple #settingsModal .settings-panel:not(.settings-panel--mode) .hint {
+  display: none;
+}
+
+body.mode-simple #settingsModal #settingsProvider .tabs--provider,
+body.mode-simple #settingsModal #settingsProvider .settings-provider__note {
+  display: none !important;
+}
+
+body.mode-simple #settingsModal #settingsProvider .tab-panel {
+  display: block !important;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+body.mode-simple #settingsModal #settingsProvider .tab-panel + .tab-panel {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+body.mode-simple #settingsModal .settings-provider__provider-name {
+  display: block;
 }
 
 @media (max-width: 520px) {

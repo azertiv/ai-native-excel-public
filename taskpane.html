@@ -226,7 +226,7 @@
 
           <div id="configBody" class="card__body">
             <div class="config-grid">
-              <div class="form-row">
+              <div id="configProviderRow" class="form-row">
                 <div class="label-row">
                   <label>Fournisseur par défaut</label>
                   <span class="help" data-help>
@@ -257,7 +257,7 @@
                 </button>
               </div>
 
-              <div class="form-row form-row--full">
+              <div id="configMaxTokensRow" class="form-row form-row--full">
                 <div class="label-row">
                   <label for="maxTokensRange">Max output tokens</label>
                   <span class="help" data-help>
@@ -274,7 +274,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-row form-row--full">
+              <div id="configConcurrencyRow" class="form-row form-row--full">
                 <div class="label-row">
                   <label for="concurrencyRange">Concurrence requêtes</label>
                   <span class="help" data-help>
@@ -598,7 +598,28 @@
           <button class="icon-button" type="button" data-settings-close aria-label="Fermer">x</button>
         </div>
         <div class="modal__body modal__body--settings">
-          <div class="settings-panel">
+          <div class="settings-panel settings-panel--mode">
+            <div class="settings-panel__header">
+              <div class="settings-panel__title">Affichage</div>
+              <div class="settings-panel__subtitle">Choisissez votre niveau de détail</div>
+            </div>
+            <div class="settings-panel__body">
+              <div class="form-row">
+                <div class="label-row">
+                  <label>Mode d'interface</label>
+                </div>
+                <div class="segmented" role="group" aria-label="Mode d'interface">
+                  <button id="interfaceModeSimple" class="segmented__btn" type="button" data-interface-mode="simple">Simple</button>
+                  <button id="interfaceModeAdvanced" class="segmented__btn" type="button" data-interface-mode="advanced">Avancé</button>
+                </div>
+                <div id="interfaceModeHint" class="hint">
+                  Avancé: affichage complet avec logs, cache, diagnostic et réglages experts.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-panel settings-panel--license">
             <div class="settings-panel__header">
               <div class="settings-panel__title">Licence</div>
               <div class="settings-panel__subtitle">Activation et renouvellement</div>
@@ -628,7 +649,7 @@
             </div>
           </div>
 
-          <div class="settings-panel">
+          <div class="settings-panel settings-panel--providers">
             <div class="settings-panel__header">
               <div class="settings-panel__title">Fournisseurs</div>
               <div class="settings-panel__subtitle">Clés API, modèles et effort de raisonnement</div>
@@ -647,7 +668,8 @@
                   Réglages du fournisseur sélectionné : <strong id="settingsProviderName">Gemini</strong>
                 </div>
                 <div id="panelGemini" class="tab-panel tab-panel--active settings-provider__panel" role="tabpanel" aria-labelledby="tabGemini">
-                    <div class="settings-block">
+                    <div class="settings-provider__provider-name">Gemini</div>
+                    <div class="settings-block settings-block--api">
                       <div class="settings-block__title">Clé API</div>
                       <div class="form-row">
                         <div class="label-row">
@@ -676,7 +698,7 @@
                         <div class="hint">Clé stockée localement sur cette machine</div>
                       </div>
                     </div>
-                    <div class="settings-block">
+                    <div class="settings-block settings-block--advanced">
                       <div class="settings-block__title">Modèles</div>
                       <div class="form-row">
                         <div class="label-row">
@@ -706,7 +728,7 @@
                       </div>
                     </div>
 
-                    <div class="settings-block">
+                    <div class="settings-block settings-block--advanced">
                       <div class="settings-block__title">Effort de raisonnement</div>
                       <div class="form-row">
                         <div class="label-row">
@@ -742,7 +764,8 @@
                 </div>
 
                 <div id="panelOpenAI" class="tab-panel settings-provider__panel" role="tabpanel" aria-labelledby="tabOpenAI">
-                    <div class="settings-block">
+                    <div class="settings-provider__provider-name">OpenAI</div>
+                    <div class="settings-block settings-block--api">
                       <div class="settings-block__title">Clé API</div>
                       <div class="form-row">
                         <div class="label-row">
@@ -771,7 +794,7 @@
                         <div class="hint">Clé stockée localement sur cette machine</div>
                       </div>
                     </div>
-                    <div class="settings-block">
+                    <div class="settings-block settings-block--advanced">
                       <div class="settings-block__title">Modèles</div>
                       <div class="form-row">
                         <div class="label-row">
@@ -801,7 +824,7 @@
                       </div>
                     </div>
 
-                    <div class="settings-block">
+                    <div class="settings-block settings-block--advanced">
                       <div class="settings-block__title">Effort de raisonnement</div>
                       <div class="form-row">
                         <div class="label-row">
@@ -841,7 +864,7 @@
             </div>
           </div>
 
-          <div class="settings-panel">
+          <div class="settings-panel settings-panel--performance">
             <div class="settings-panel__header">
               <div class="settings-panel__title">Performance</div>
               <div class="settings-panel__subtitle">Limites d'appels et file d'attente</div>
@@ -872,7 +895,7 @@
             </div>
           </div>
 
-          <div class="settings-panel">
+          <div class="settings-panel settings-panel--privacy">
             <div class="settings-panel__header">
               <div class="settings-panel__title">Confidentialité</div>
               <div class="settings-panel__subtitle">Journal et cache persistants</div>
