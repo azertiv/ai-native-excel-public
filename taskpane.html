@@ -595,20 +595,18 @@
       <div class="settings-page__body">
         <div class="settings-panel settings-panel--mode">
           <div class="settings-panel__header">
-            <div class="settings-panel__title">Interface</div>
+            <div class="settings-panel__title">Mode d'interface</div>
+            <span class="help" data-help>
+              <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide mode d'interface" aria-expanded="false">?</button>
+              <span id="interfaceModeHint" class="help__popup" role="tooltip">
+                Avancé: affichage complet avec logs, cache, diagnostic et réglages experts.
+              </span>
+            </span>
           </div>
           <div class="settings-panel__body">
-            <div class="form-row">
-              <div class="label-row">
-                <label>Mode</label>
-              </div>
-              <div class="segmented" role="group" aria-label="Mode d'interface">
-                <button id="interfaceModeSimple" class="segmented__btn" type="button" data-interface-mode="simple">Simple</button>
-                <button id="interfaceModeAdvanced" class="segmented__btn" type="button" data-interface-mode="advanced">Avancé</button>
-              </div>
-              <div id="interfaceModeHint" class="hint">
-                Avancé: affichage complet avec logs, cache, diagnostic et réglages experts.
-              </div>
+            <div class="segmented" role="group" aria-label="Mode d'interface">
+              <button id="interfaceModeSimple" class="segmented__btn" type="button" data-interface-mode="simple">Simple</button>
+              <button id="interfaceModeAdvanced" class="segmented__btn" type="button" data-interface-mode="advanced">Avancé</button>
             </div>
           </div>
         </div>
@@ -616,27 +614,28 @@
         <div class="settings-panel settings-panel--license">
           <div class="settings-panel__header">
             <div class="settings-panel__title">Licence</div>
+            <div class="settings-panel__header-meta">
+              <span class="key-status key-status--compact key-status--missing settings-panel__status" data-license-status>Aucune licence</span>
+              <span class="help" data-help>
+                <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide licence" aria-expanded="false">?</button>
+                <span class="help__popup" role="tooltip" data-license-meta>
+                  Clé reçue par email après achat (mensuel ou annuel)
+                </span>
+              </span>
+            </div>
           </div>
           <div class="settings-panel__body">
-            <div class="settings-block settings-block--intro">
-              <div class="form-row">
-                <div class="label-row">
-                  <label for="settingsLicenseKey">Clé</label>
-                  <span class="key-status" data-license-status>Aucune licence enregistrée</span>
-                </div>
-                <div class="input-action">
-                  <input
-                    id="settingsLicenseKey"
-                    class="input"
-                    type="text"
-                    placeholder="AAAA-BBBB-CCCC-DDDD"
-                    spellcheck="false"
-                    data-license-input
-                  />
-                  <button class="btn btn--primary" type="button" data-license-activate data-license-target="settingsLicenseKey">Activer</button>
-                </div>
-                <div class="hint" data-license-meta>Clé reçue par email après achat (mensuel ou annuel)</div>
-              </div>
+            <div class="input-action">
+              <input
+                id="settingsLicenseKey"
+                class="input"
+                type="text"
+                placeholder="AAAA-BBBB-CCCC-DDDD"
+                spellcheck="false"
+                aria-label="Clé de licence"
+                data-license-input
+              />
+              <button class="btn btn--primary" type="button" data-license-activate data-license-target="settingsLicenseKey">Activer</button>
             </div>
           </div>
         </div>
@@ -655,16 +654,20 @@
                   OpenAI
                 </button>
               </div>
-              <div id="settingsProviderNote" class="settings-provider__note">
-                Fournisseur actif : <strong id="settingsProviderName">Gemini</strong>
-              </div>
+
               <div id="panelGemini" class="tab-panel tab-panel--active settings-provider__panel" role="tabpanel" aria-labelledby="tabGemini">
                 <div class="settings-provider__provider-name">Gemini</div>
                 <div class="settings-block settings-block--api">
                   <div class="form-row">
                     <div class="label-row">
-                      <label for="settingsGeminiKey">Clé</label>
+                      <label for="settingsGeminiKey">Clé API</label>
                       <span class="key-status" data-key-status="gemini">Clé manquante</span>
+                      <span class="help" data-help>
+                        <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé API Gemini" aria-expanded="false">?</button>
+                        <span class="help__popup" role="tooltip">
+                          Clé stockée localement sur cette machine
+                        </span>
+                      </span>
                     </div>
                     <div class="input-action">
                       <input
@@ -685,9 +688,9 @@
                         &#10003;
                       </button>
                     </div>
-                    <div class="hint">Clé stockée localement sur cette machine</div>
                   </div>
                 </div>
+
                 <div class="settings-block settings-block--advanced">
                   <div class="form-row">
                     <div class="label-row">
@@ -711,9 +714,7 @@
                     <select id="geminiModel" class="input input--select"></select>
                     <div id="geminiModelGate" class="inline-alert is-hidden">
                       <span>Ajoutez une clé API pour choisir un modèle.</span>
-                      <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
                     </div>
-                    <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion</div>
                   </div>
                 </div>
 
@@ -756,8 +757,14 @@
                 <div class="settings-block settings-block--api">
                   <div class="form-row">
                     <div class="label-row">
-                      <label for="settingsOpenAIKey">Clé</label>
+                      <label for="settingsOpenAIKey">Clé API</label>
                       <span class="key-status" data-key-status="openai">Clé manquante</span>
+                      <span class="help" data-help>
+                        <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide clé API OpenAI" aria-expanded="false">?</button>
+                        <span class="help__popup" role="tooltip">
+                          Clé stockée localement sur cette machine
+                        </span>
+                      </span>
                     </div>
                     <div class="input-action">
                       <input
@@ -778,9 +785,9 @@
                         &#10003;
                       </button>
                     </div>
-                    <div class="hint">Clé stockée localement sur cette machine</div>
                   </div>
                 </div>
+
                 <div class="settings-block settings-block--advanced">
                   <div class="form-row">
                     <div class="label-row">
@@ -804,9 +811,7 @@
                     <select id="openaiModel" class="input input--select"></select>
                     <div id="openaiModelGate" class="inline-alert is-hidden">
                       <span>Ajoutez une clé API pour choisir un modèle.</span>
-                      <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
                     </div>
-                    <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion</div>
                   </div>
                 </div>
 
@@ -840,30 +845,25 @@
                         <span data-value="high" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> high</span>
                       </div>
                     </div>
-                    <div class="hint">Docs : low/medium/high · Autres valeurs peuvent échouer</div>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
         <div class="settings-panel settings-panel--performance">
           <div class="settings-panel__header">
-            <div class="settings-panel__title">Performance</div>
+            <div class="settings-panel__title">Limite RPM</div>
+            <span class="help" data-help>
+              <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide limite RPM" aria-expanded="false">?</button>
+              <span class="help__popup" role="tooltip">
+                Nombre maximum de requêtes par minute (global). 0 = illimité · Fenêtre glissante de 60 secondes.
+              </span>
+            </span>
           </div>
           <div class="settings-panel__body">
-            <div class="form-row">
-              <div class="label-row">
-                <label for="rpmLimitInput">Limite RPM</label>
-                <span class="help" data-help>
-                  <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide limite RPM" aria-expanded="false">?</button>
-                  <span class="help__popup" role="tooltip">
-                    Nombre maximum de requetes par minute (global). 0 = illimit&eacute;.
-                  </span>
-                </span>
-              </div>
+            <div class="input-action">
               <input
                 id="rpmLimitInput"
                 class="input"
@@ -873,51 +873,29 @@
                 step="1"
                 inputmode="numeric"
                 placeholder="0"
+                aria-label="Limite RPM"
               />
-              <div class="hint">0 = illimit&eacute; &middot; Fen&ecirc;tre glissante de 60 secondes.</div>
             </div>
           </div>
         </div>
 
         <div class="settings-panel settings-panel--privacy">
           <div class="settings-panel__header">
-            <div class="settings-panel__title">Confidentialité</div>
+            <div class="settings-panel__title">Mode confidentialité</div>
+            <span class="help" data-help>
+              <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide mode confidentialité" aria-expanded="false">?</button>
+              <span id="privacyModeHint" class="help__popup" role="tooltip">
+                Journal et cache persistants activés.
+              </span>
+            </span>
           </div>
           <div class="settings-panel__body">
-            <div class="form-row">
-              <div class="label-row">
-                <label for="privacyModeToggle">Mode confidentialité</label>
-                <span class="help" data-help>
-                  <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide mode confidentialité" aria-expanded="false">?</button>
-                  <span class="help__popup" role="tooltip">
-                    Désactive l'enregistrement persistant du journal et du cache · À l'activation, le cache et le journal existants sont vidés
-                  </span>
-                </span>
-              </div>
-              <div class="privacy-toggle">
-                <label class="visibility-toggle">
-                  <input id="privacyModeToggle" type="checkbox" />
-                  <span class="visibility-toggle__slider"></span>
-                </label>
-                <span id="privacyModeStatus" class="privacy-toggle__status">Désactivé</span>
-              </div>
-              <div id="privacyModeHint" class="hint">Journal et cache persistants activés.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="settings-panel settings-panel--status">
-          <div class="settings-panel__header">
-            <div class="settings-panel__title">Statut</div>
-          </div>
-          <div class="settings-panel__body">
-            <div class="status" aria-live="polite">
-              <div id="statusLine" class="status__line">Chargement…</div>
-              <div class="status__meta">Stockage : <span id="storageBackend">?</span></div>
-              <details class="status__details">
-                <summary>Détails</summary>
-                <pre id="statusDetails" class="status__pre"></pre>
-              </details>
+            <div class="privacy-toggle">
+              <label class="visibility-toggle">
+                <input id="privacyModeToggle" type="checkbox" />
+                <span class="visibility-toggle__slider"></span>
+              </label>
+              <span id="privacyModeStatus" class="privacy-toggle__status">Désactivé</span>
             </div>
           </div>
         </div>

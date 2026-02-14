@@ -474,14 +474,26 @@ body {
 }
 
 .settings-panel {
+  position: relative;
+  isolation: isolate;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.92);
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
   box-shadow: var(--shadow-soft);
+}
+
+.settings-panel::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 16px;
+  background: transparent;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .settings-panel + .settings-panel {
@@ -490,29 +502,24 @@ body {
   border-top: none;
 }
 
-.settings-panel--mode {
-  border-color: rgba(42, 157, 143, 0.24);
-  background: linear-gradient(180deg, rgba(42, 157, 143, 0.12), rgba(42, 157, 143, 0.06));
+.settings-panel--mode::before {
+  background: linear-gradient(160deg, rgba(42, 157, 143, 0.2), rgba(42, 157, 143, 0.06));
 }
 
-.settings-panel--license {
-  border-color: rgba(231, 111, 81, 0.24);
-  background: linear-gradient(180deg, rgba(231, 111, 81, 0.11), rgba(231, 111, 81, 0.05));
+.settings-panel--license::before {
+  background: linear-gradient(160deg, rgba(231, 111, 81, 0.2), rgba(231, 111, 81, 0.06));
 }
 
-.settings-panel--providers {
-  border-color: rgba(38, 70, 83, 0.22);
-  background: linear-gradient(180deg, rgba(38, 70, 83, 0.09), rgba(38, 70, 83, 0.04));
+.settings-panel--providers::before {
+  background: linear-gradient(160deg, rgba(38, 70, 83, 0.18), rgba(38, 70, 83, 0.05));
 }
 
-.settings-panel--performance {
-  border-color: rgba(201, 122, 74, 0.22);
-  background: linear-gradient(180deg, rgba(201, 122, 74, 0.1), rgba(201, 122, 74, 0.04));
+.settings-panel--performance::before {
+  background: linear-gradient(160deg, rgba(201, 122, 74, 0.2), rgba(201, 122, 74, 0.06));
 }
 
-.settings-panel--privacy {
-  border-color: rgba(42, 157, 143, 0.22);
-  background: linear-gradient(180deg, rgba(42, 157, 143, 0.1), rgba(42, 157, 143, 0.04));
+.settings-panel--privacy::before {
+  background: linear-gradient(160deg, rgba(42, 157, 143, 0.2), rgba(42, 157, 143, 0.06));
 }
 
 .settings-panel__header {
@@ -523,6 +530,16 @@ body {
   justify-content: space-between;
   padding: 8px 10px 6px;
   border-bottom: 1px dashed rgba(38, 70, 83, 0.12);
+}
+
+.settings-panel__header-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-panel__status {
+  white-space: nowrap;
 }
 
 .settings-panel__title {
