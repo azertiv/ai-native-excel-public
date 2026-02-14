@@ -76,11 +76,14 @@ body {
 }
 
 .brand {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
+}
+
+.brand--minimal {
+  gap: 0;
 }
 
 .brand__mark {
@@ -366,7 +369,7 @@ body {
   gap: 6px;
 }
 
-.modal__body.modal__body--settings .form-row {
+.settings-page__body .form-row {
   gap: 4px;
 }
 
@@ -462,19 +465,18 @@ body {
   margin-top: 0;
 }
 
-.modal__body.modal__body--settings .actions {
+.settings-page__body .actions {
   margin-top: 4px;
 }
 
-.modal__body.modal__body--settings {
+.settings-page__body {
   gap: 10px;
-  padding: 10px 10px 14px;
 }
 
 .settings-panel {
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.78);
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -486,6 +488,31 @@ body {
   margin-top: 10px;
   padding-top: 0;
   border-top: none;
+}
+
+.settings-panel--mode {
+  border-color: rgba(42, 157, 143, 0.24);
+  background: linear-gradient(180deg, rgba(42, 157, 143, 0.12), rgba(42, 157, 143, 0.06));
+}
+
+.settings-panel--license {
+  border-color: rgba(231, 111, 81, 0.24);
+  background: linear-gradient(180deg, rgba(231, 111, 81, 0.11), rgba(231, 111, 81, 0.05));
+}
+
+.settings-panel--providers {
+  border-color: rgba(38, 70, 83, 0.22);
+  background: linear-gradient(180deg, rgba(38, 70, 83, 0.09), rgba(38, 70, 83, 0.04));
+}
+
+.settings-panel--performance {
+  border-color: rgba(201, 122, 74, 0.22);
+  background: linear-gradient(180deg, rgba(201, 122, 74, 0.1), rgba(201, 122, 74, 0.04));
+}
+
+.settings-panel--privacy {
+  border-color: rgba(42, 157, 143, 0.22);
+  background: linear-gradient(180deg, rgba(42, 157, 143, 0.1), rgba(42, 157, 143, 0.04));
 }
 
 .settings-panel__header {
@@ -2439,6 +2466,61 @@ body {
   border-radius: 999px;
 }
 
+.settings-page {
+  display: none;
+  min-height: 100%;
+  height: 100%;
+  padding: 10px 12px 12px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-page.is-open {
+  display: flex;
+}
+
+body.is-settings-open .app {
+  display: none;
+}
+
+.settings-page__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 4px 2px 0;
+}
+
+.settings-page__back {
+  width: 32px;
+  height: 32px;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.settings-page__titles {
+  min-width: 0;
+}
+
+.settings-page__title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.settings-page__subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.settings-page__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding: 4px 2px 8px;
+}
+
 .modal {
   position: fixed;
   inset: 0;
@@ -2447,10 +2529,6 @@ body {
   justify-content: center;
   padding: 16px;
   z-index: 50;
-}
-
-.modal--settings {
-  padding: 10px;
 }
 
 .modal.is-open {
@@ -2476,12 +2554,6 @@ body {
   animation: fadeUp 0.25s ease both;
   display: flex;
   flex-direction: column;
-}
-
-.modal--settings .modal__panel {
-  width: min(980px, 96vw);
-  max-height: 92vh;
-  height: 92vh;
 }
 
 .modal__header {
@@ -2758,7 +2830,7 @@ body.mode-simple #queueStatus #rpmStatus {
   display: none !important;
 }
 
-body.mode-simple #settingsModal .modal__body.modal__body--settings {
+body.mode-simple #settingsModal .settings-page__body {
   gap: 8px;
 }
 
@@ -2803,8 +2875,7 @@ body.mode-simple #settingsModal .settings-provider__provider-name {
 
 @media (max-width: 520px) {
   .app__header {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 10px 12px 8px;
   }
 
   .breakdown__row {

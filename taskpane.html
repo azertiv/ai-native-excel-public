@@ -17,18 +17,13 @@
   <body class="ms-Fabric" dir="ltr">
     <div class="app">
       <header class="app__header">
-        <div class="brand">
-          <div class="brand__mark">
-            <img class="brand__logo" src="assets/Logo%20Neurow%20256.jpg" alt="Logo Neurow" />
-          </div>
-          <div class="brand__text">
-            <div class="brand__headline">
-              <div class="app__title">Neurow</div>
-              <div class="app__header-actions">
-                <button id="settingsButton" class="icon-button icon-button--gear" type="button" title="Réglages" aria-label="Ouvrir les réglages">
-                  &#9881;
-                </button>
-              </div>
+        <div class="brand brand--minimal">
+          <div class="brand__headline">
+            <div class="app__title">Neurow.Excel</div>
+            <div class="app__header-actions">
+              <button id="settingsButton" class="icon-button icon-button--gear" type="button" title="Réglages" aria-label="Ouvrir les réglages">
+                &#9881;
+              </button>
             </div>
           </div>
         </div>
@@ -587,358 +582,344 @@
       </main>
     </div>
 
-    <div id="settingsModal" class="modal modal--settings" aria-hidden="true" role="dialog" aria-labelledby="settingsTitle">
-      <div class="modal__backdrop" data-settings-close></div>
-      <div class="modal__panel" role="document">
-        <div class="modal__header">
-          <div>
-            <div id="settingsTitle" class="modal__title">Réglages</div>
-            <div class="modal__subtitle">Clés API, licence, modèles et effort de raisonnement</div>
-          </div>
-          <button class="icon-button" type="button" data-settings-close aria-label="Fermer">x</button>
+    <div id="settingsModal" class="settings-page" aria-hidden="true">
+      <div class="settings-page__header">
+        <button id="settingsBackButton" class="icon-button settings-page__back" type="button" data-settings-close aria-label="Retour">
+          &#8592;
+        </button>
+        <div class="settings-page__titles">
+          <div id="settingsTitle" class="settings-page__title">Réglages</div>
+          <div class="settings-page__subtitle">Clés, modèles, performance et confidentialité</div>
         </div>
-        <div class="modal__body modal__body--settings">
-          <div class="settings-panel settings-panel--mode">
-            <div class="settings-panel__header">
-              <div class="settings-panel__title">Affichage</div>
-              <div class="settings-panel__subtitle">Choisissez votre niveau de détail</div>
-            </div>
-            <div class="settings-panel__body">
-              <div class="form-row">
-                <div class="label-row">
-                  <label>Mode d'interface</label>
-                </div>
-                <div class="segmented" role="group" aria-label="Mode d'interface">
-                  <button id="interfaceModeSimple" class="segmented__btn" type="button" data-interface-mode="simple">Simple</button>
-                  <button id="interfaceModeAdvanced" class="segmented__btn" type="button" data-interface-mode="advanced">Avancé</button>
-                </div>
-                <div id="interfaceModeHint" class="hint">
-                  Avancé: affichage complet avec logs, cache, diagnostic et réglages experts.
-                </div>
+      </div>
+      <div class="settings-page__body">
+        <div class="settings-panel settings-panel--mode">
+          <div class="settings-panel__header">
+            <div class="settings-panel__title">Interface</div>
+          </div>
+          <div class="settings-panel__body">
+            <div class="form-row">
+              <div class="label-row">
+                <label>Mode</label>
+              </div>
+              <div class="segmented" role="group" aria-label="Mode d'interface">
+                <button id="interfaceModeSimple" class="segmented__btn" type="button" data-interface-mode="simple">Simple</button>
+                <button id="interfaceModeAdvanced" class="segmented__btn" type="button" data-interface-mode="advanced">Avancé</button>
+              </div>
+              <div id="interfaceModeHint" class="hint">
+                Avancé: affichage complet avec logs, cache, diagnostic et réglages experts.
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="settings-panel settings-panel--license">
-            <div class="settings-panel__header">
-              <div class="settings-panel__title">Licence</div>
-              <div class="settings-panel__subtitle">Activation et renouvellement</div>
+        <div class="settings-panel settings-panel--license">
+          <div class="settings-panel__header">
+            <div class="settings-panel__title">Licence</div>
+          </div>
+          <div class="settings-panel__body">
+            <div class="settings-block settings-block--intro">
+              <div class="form-row">
+                <div class="label-row">
+                  <label for="settingsLicenseKey">Clé</label>
+                  <span class="key-status" data-license-status>Aucune licence enregistrée</span>
+                </div>
+                <div class="input-action">
+                  <input
+                    id="settingsLicenseKey"
+                    class="input"
+                    type="text"
+                    placeholder="AAAA-BBBB-CCCC-DDDD"
+                    spellcheck="false"
+                    data-license-input
+                  />
+                  <button class="btn btn--primary" type="button" data-license-activate data-license-target="settingsLicenseKey">Activer</button>
+                </div>
+                <div class="hint" data-license-meta>Clé reçue par email après achat (mensuel ou annuel)</div>
+              </div>
             </div>
-            <div class="settings-panel__body">
-              <div class="settings-block settings-block--intro">
-                <div class="settings-block__title">Activation</div>
-                <div class="form-row">
-                  <div class="label-row">
-                    <label for="settingsLicenseKey">Clé de licence</label>
-                    <span class="key-status" data-license-status>Aucune licence enregistrée</span>
+          </div>
+        </div>
+
+        <div class="settings-panel settings-panel--providers">
+          <div class="settings-panel__header">
+            <div class="settings-panel__title">Fournisseurs IA</div>
+          </div>
+          <div class="settings-panel__body">
+            <div id="settingsProvider" class="settings-provider" data-active-provider="gemini">
+              <div class="tabs tabs--provider" role="tablist" aria-label="Fournisseurs">
+                <button id="tabGemini" class="tab tab--active" type="button" role="tab" aria-selected="true" aria-controls="panelGemini">
+                  Gemini
+                </button>
+                <button id="tabOpenAI" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panelOpenAI">
+                  OpenAI
+                </button>
+              </div>
+              <div id="settingsProviderNote" class="settings-provider__note">
+                Fournisseur actif : <strong id="settingsProviderName">Gemini</strong>
+              </div>
+              <div id="panelGemini" class="tab-panel tab-panel--active settings-provider__panel" role="tabpanel" aria-labelledby="tabGemini">
+                <div class="settings-provider__provider-name">Gemini</div>
+                <div class="settings-block settings-block--api">
+                  <div class="form-row">
+                    <div class="label-row">
+                      <label for="settingsGeminiKey">Clé</label>
+                      <span class="key-status" data-key-status="gemini">Clé manquante</span>
+                    </div>
+                    <div class="input-action">
+                      <input
+                        id="settingsGeminiKey"
+                        class="input"
+                        type="password"
+                        placeholder="AIza..."
+                        spellcheck="false"
+                        aria-label="Clé API Gemini"
+                        data-key-input="gemini"
+                      />
+                      <button
+                        class="icon-button icon-button--check"
+                        type="button"
+                        data-key-save="gemini"
+                        aria-label="Valider la clé API Gemini"
+                      >
+                        &#10003;
+                      </button>
+                    </div>
+                    <div class="hint">Clé stockée localement sur cette machine</div>
                   </div>
-                  <div class="input-action">
-                    <input
-                      id="settingsLicenseKey"
-                      class="input"
-                      type="text"
-                      placeholder="AAAA-BBBB-CCCC-DDDD"
-                      spellcheck="false"
-                      data-license-input
-                    />
-                    <button class="btn btn--primary" type="button" data-license-activate data-license-target="settingsLicenseKey">Activer</button>
+                </div>
+                <div class="settings-block settings-block--advanced">
+                  <div class="form-row">
+                    <div class="label-row">
+                      <label for="geminiModel">Modèle</label>
+                      <span
+                        id="geminiModelWarning"
+                        class="warning-mark is-hidden"
+                        role="img"
+                        aria-label="Modèle à fort raisonnement, coût élevé"
+                        title="Modèle à fort raisonnement, coût élevé"
+                      >
+                        !
+                      </span>
+                      <span class="help" data-help>
+                        <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide modèle Gemini" aria-expanded="false">?</button>
+                        <span class="help__popup" role="tooltip">
+                          Choisissez le modèle Gemini : certains sont plus rapides, d'autres plus précis · $ = coût, &#129504; = raisonnement
+                        </span>
+                      </span>
+                    </div>
+                    <select id="geminiModel" class="input input--select"></select>
+                    <div id="geminiModelGate" class="inline-alert is-hidden">
+                      <span>Ajoutez une clé API pour choisir un modèle.</span>
+                      <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
+                    </div>
+                    <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion</div>
                   </div>
-                  <div class="hint" data-license-meta>Clé reçue par email après achat (mensuel ou annuel)</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="settings-panel settings-panel--providers">
-            <div class="settings-panel__header">
-              <div class="settings-panel__title">Fournisseurs</div>
-              <div class="settings-panel__subtitle">Clés API, modèles et effort de raisonnement</div>
-            </div>
-            <div class="settings-panel__body">
-              <div id="settingsProvider" class="settings-provider" data-active-provider="gemini">
-                <div class="tabs tabs--provider" role="tablist" aria-label="Fournisseurs">
-                  <button id="tabGemini" class="tab tab--active" type="button" role="tab" aria-selected="true" aria-controls="panelGemini">
-                    Gemini
-                  </button>
-                  <button id="tabOpenAI" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panelOpenAI">
-                    OpenAI
-                  </button>
-                </div>
-                <div id="settingsProviderNote" class="settings-provider__note">
-                  Réglages du fournisseur sélectionné : <strong id="settingsProviderName">Gemini</strong>
-                </div>
-                <div id="panelGemini" class="tab-panel tab-panel--active settings-provider__panel" role="tabpanel" aria-labelledby="tabGemini">
-                    <div class="settings-provider__provider-name">Gemini</div>
-                    <div class="settings-block settings-block--api">
-                      <div class="settings-block__title">Clé API</div>
-                      <div class="form-row">
-                        <div class="label-row">
-                          <label for="settingsGeminiKey">Clé API Gemini</label>
-                          <span class="key-status" data-key-status="gemini">Clé manquante</span>
-                        </div>
-                        <div class="input-action">
-                          <input
-                            id="settingsGeminiKey"
-                            class="input"
-                            type="password"
-                            placeholder="AIza..."
-                            spellcheck="false"
-                            aria-label="Clé API Gemini"
-                            data-key-input="gemini"
-                          />
-                          <button
-                            class="icon-button icon-button--check"
-                            type="button"
-                            data-key-save="gemini"
-                            aria-label="Valider la clé API Gemini"
-                          >
-                            &#10003;
-                          </button>
-                        </div>
-                        <div class="hint">Clé stockée localement sur cette machine</div>
-                      </div>
-                    </div>
-                    <div class="settings-block settings-block--advanced">
-                      <div class="settings-block__title">Modèles</div>
-                      <div class="form-row">
-                        <div class="label-row">
-                          <label for="geminiModel">Modèle Gemini</label>
-                          <span
-                            id="geminiModelWarning"
-                            class="warning-mark is-hidden"
-                            role="img"
-                            aria-label="Modèle à fort raisonnement, coût élevé"
-                            title="Modèle à fort raisonnement, coût élevé"
-                          >
-                            !
-                          </span>
-                          <span class="help" data-help>
-                            <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide modèle Gemini" aria-expanded="false">?</button>
-                            <span class="help__popup" role="tooltip">
-                              Choisissez le modèle Gemini : certains sont plus rapides, d'autres plus précis · $ = coût, &#129504; = raisonnement
-                            </span>
-                          </span>
-                        </div>
-                        <select id="geminiModel" class="input input--select"></select>
-                        <div id="geminiModelGate" class="inline-alert is-hidden">
-                          <span>Ajoutez une clé API pour choisir un modèle.</span>
-                          <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
-                        </div>
-                        <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion</div>
-                      </div>
-                    </div>
-
-                    <div class="settings-block settings-block--advanced">
-                      <div class="settings-block__title">Effort de raisonnement</div>
-                      <div class="form-row">
-                        <div class="label-row">
-                          <label for="geminiReasoningEffort">Effort de raisonnement</label>
-                          <span class="help" data-help>
-                            <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide effort de raisonnement Gemini" aria-expanded="false">?</button>
-                            <span class="help__popup" role="tooltip">
-                              Auto = comportement par défaut · Gemini 3 utilise thinkingLevel, Gemini 2.5 utilise thinkingBudget
-                            </span>
-                          </span>
-                        </div>
-                        <div class="reasoning">
-                          <div class="reasoning__control">
-                            <input id="geminiReasoningEffort" class="reasoning__input" type="range" min="0" max="4" step="1" />
-                            <div class="reasoning__track" aria-hidden="true">
-                              <span class="reasoning__dot" data-value="auto"></span>
-                              <span class="reasoning__dot" data-value="minimal"></span>
-                              <span class="reasoning__dot" data-value="low"></span>
-                              <span class="reasoning__dot" data-value="medium"></span>
-                              <span class="reasoning__dot" data-value="high"></span>
-                            </div>
-                          </div>
-                          <div class="reasoning__labels" aria-hidden="true">
-                            <span data-value="auto">auto</span>
-                            <span data-value="minimal">minimal</span>
-                            <span data-value="low">low</span>
-                            <span data-value="medium" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> medium</span>
-                            <span data-value="high" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> high</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                 </div>
 
-                <div id="panelOpenAI" class="tab-panel settings-provider__panel" role="tabpanel" aria-labelledby="tabOpenAI">
-                    <div class="settings-provider__provider-name">OpenAI</div>
-                    <div class="settings-block settings-block--api">
-                      <div class="settings-block__title">Clé API</div>
-                      <div class="form-row">
-                        <div class="label-row">
-                          <label for="settingsOpenAIKey">Clé API OpenAI</label>
-                          <span class="key-status" data-key-status="openai">Clé manquante</span>
+                <div class="settings-block settings-block--advanced">
+                  <div class="form-row">
+                    <div class="label-row">
+                      <label for="geminiReasoningEffort">Effort</label>
+                      <span class="help" data-help>
+                        <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide effort de raisonnement Gemini" aria-expanded="false">?</button>
+                        <span class="help__popup" role="tooltip">
+                          Auto = comportement par défaut · Gemini 3 utilise thinkingLevel, Gemini 2.5 utilise thinkingBudget
+                        </span>
+                      </span>
+                    </div>
+                    <div class="reasoning">
+                      <div class="reasoning__control">
+                        <input id="geminiReasoningEffort" class="reasoning__input" type="range" min="0" max="4" step="1" />
+                        <div class="reasoning__track" aria-hidden="true">
+                          <span class="reasoning__dot" data-value="auto"></span>
+                          <span class="reasoning__dot" data-value="minimal"></span>
+                          <span class="reasoning__dot" data-value="low"></span>
+                          <span class="reasoning__dot" data-value="medium"></span>
+                          <span class="reasoning__dot" data-value="high"></span>
                         </div>
-                        <div class="input-action">
-                          <input
-                            id="settingsOpenAIKey"
-                            class="input"
-                            type="password"
-                            placeholder="sk-..."
-                            spellcheck="false"
-                            aria-label="Clé API OpenAI"
-                            data-key-input="openai"
-                          />
-                          <button
-                            class="icon-button icon-button--check"
-                            type="button"
-                            data-key-save="openai"
-                            aria-label="Valider la clé API OpenAI"
-                          >
-                            &#10003;
-                          </button>
-                        </div>
-                        <div class="hint">Clé stockée localement sur cette machine</div>
+                      </div>
+                      <div class="reasoning__labels" aria-hidden="true">
+                        <span data-value="auto">auto</span>
+                        <span data-value="minimal">minimal</span>
+                        <span data-value="low">low</span>
+                        <span data-value="medium" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> medium</span>
+                        <span data-value="high" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> high</span>
                       </div>
                     </div>
-                    <div class="settings-block settings-block--advanced">
-                      <div class="settings-block__title">Modèles</div>
-                      <div class="form-row">
-                        <div class="label-row">
-                          <label for="openaiModel">Modèle OpenAI</label>
-                          <span
-                            id="openaiModelWarning"
-                            class="warning-mark is-hidden"
-                            role="img"
-                            aria-label="Modèle à fort raisonnement, coût élevé"
-                            title="Modèle à fort raisonnement, coût élevé"
-                          >
-                            !
-                          </span>
-                          <span class="help" data-help>
-                            <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide modèle OpenAI" aria-expanded="false">?</button>
-                            <span class="help__popup" role="tooltip">
-                              Choisissez le modèle OpenAI : impact direct sur le coût et la qualité · $ = coût, &#129504; = raisonnement
-                            </span>
-                          </span>
-                        </div>
-                        <select id="openaiModel" class="input input--select"></select>
-                        <div id="openaiModelGate" class="inline-alert is-hidden">
-                          <span>Ajoutez une clé API pour choisir un modèle.</span>
-                          <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
-                        </div>
-                        <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion</div>
-                      </div>
-                    </div>
-
-                    <div class="settings-block settings-block--advanced">
-                      <div class="settings-block__title">Effort de raisonnement</div>
-                      <div class="form-row">
-                        <div class="label-row">
-                          <label for="openaiReasoningEffort">Effort de raisonnement</label>
-                          <span class="help" data-help>
-                            <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide effort de raisonnement" aria-expanded="false">?</button>
-                            <span class="help__popup" role="tooltip">
-                              Ajuste la profondeur de raisonnement pour OpenAI · Plus élevé = réponses plus détaillées mais plus lentes et coûteuses · Certains modèles n'acceptent pas "none"
-                            </span>
-                          </span>
-                        </div>
-                        <div class="reasoning">
-                          <div class="reasoning__control">
-                            <input id="openaiReasoningEffort" class="reasoning__input" type="range" min="0" max="4" step="1" />
-                            <div class="reasoning__track" aria-hidden="true">
-                              <span class="reasoning__dot" data-value="none"></span>
-                              <span class="reasoning__dot" data-value="minimal"></span>
-                              <span class="reasoning__dot" data-value="low"></span>
-                              <span class="reasoning__dot" data-value="medium"></span>
-                              <span class="reasoning__dot" data-value="high"></span>
-                            </div>
-                          </div>
-                          <div class="reasoning__labels" aria-hidden="true">
-                            <span data-value="none">none</span>
-                            <span data-value="minimal">minimal</span>
-                            <span data-value="low">low</span>
-                            <span data-value="medium" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> medium</span>
-                            <span data-value="high" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> high</span>
-                          </div>
-                        </div>
-                        <div class="hint">Docs : low/medium/high · Autres valeurs peuvent échouer</div>
-                      </div>
-                    </div>
+                  </div>
                 </div>
               </div>
 
-            </div>
-          </div>
+              <div id="panelOpenAI" class="tab-panel settings-provider__panel" role="tabpanel" aria-labelledby="tabOpenAI">
+                <div class="settings-provider__provider-name">OpenAI</div>
+                <div class="settings-block settings-block--api">
+                  <div class="form-row">
+                    <div class="label-row">
+                      <label for="settingsOpenAIKey">Clé</label>
+                      <span class="key-status" data-key-status="openai">Clé manquante</span>
+                    </div>
+                    <div class="input-action">
+                      <input
+                        id="settingsOpenAIKey"
+                        class="input"
+                        type="password"
+                        placeholder="sk-..."
+                        spellcheck="false"
+                        aria-label="Clé API OpenAI"
+                        data-key-input="openai"
+                      />
+                      <button
+                        class="icon-button icon-button--check"
+                        type="button"
+                        data-key-save="openai"
+                        aria-label="Valider la clé API OpenAI"
+                      >
+                        &#10003;
+                      </button>
+                    </div>
+                    <div class="hint">Clé stockée localement sur cette machine</div>
+                  </div>
+                </div>
+                <div class="settings-block settings-block--advanced">
+                  <div class="form-row">
+                    <div class="label-row">
+                      <label for="openaiModel">Modèle</label>
+                      <span
+                        id="openaiModelWarning"
+                        class="warning-mark is-hidden"
+                        role="img"
+                        aria-label="Modèle à fort raisonnement, coût élevé"
+                        title="Modèle à fort raisonnement, coût élevé"
+                      >
+                        !
+                      </span>
+                      <span class="help" data-help>
+                        <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide modèle OpenAI" aria-expanded="false">?</button>
+                        <span class="help__popup" role="tooltip">
+                          Choisissez le modèle OpenAI : impact direct sur le coût et la qualité · $ = coût, &#129504; = raisonnement
+                        </span>
+                      </span>
+                    </div>
+                    <select id="openaiModel" class="input input--select"></select>
+                    <div id="openaiModelGate" class="inline-alert is-hidden">
+                      <span>Ajoutez une clé API pour choisir un modèle.</span>
+                      <button class="text-button" type="button" data-onboarding-open>Ouvrir Mise en route</button>
+                    </div>
+                    <div class="hint">Indicateurs : $ = co&ucirc;t, &#129504; = r&eacute;flexion</div>
+                  </div>
+                </div>
 
-          <div class="settings-panel settings-panel--performance">
-            <div class="settings-panel__header">
-              <div class="settings-panel__title">Performance</div>
-              <div class="settings-panel__subtitle">Limites d'appels et file d'attente</div>
+                <div class="settings-block settings-block--advanced">
+                  <div class="form-row">
+                    <div class="label-row">
+                      <label for="openaiReasoningEffort">Effort</label>
+                      <span class="help" data-help>
+                        <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide effort de raisonnement" aria-expanded="false">?</button>
+                        <span class="help__popup" role="tooltip">
+                          Ajuste la profondeur de raisonnement pour OpenAI · Plus élevé = réponses plus détaillées mais plus lentes et coûteuses · Certains modèles n'acceptent pas "none"
+                        </span>
+                      </span>
+                    </div>
+                    <div class="reasoning">
+                      <div class="reasoning__control">
+                        <input id="openaiReasoningEffort" class="reasoning__input" type="range" min="0" max="4" step="1" />
+                        <div class="reasoning__track" aria-hidden="true">
+                          <span class="reasoning__dot" data-value="none"></span>
+                          <span class="reasoning__dot" data-value="minimal"></span>
+                          <span class="reasoning__dot" data-value="low"></span>
+                          <span class="reasoning__dot" data-value="medium"></span>
+                          <span class="reasoning__dot" data-value="high"></span>
+                        </div>
+                      </div>
+                      <div class="reasoning__labels" aria-hidden="true">
+                        <span data-value="none">none</span>
+                        <span data-value="minimal">minimal</span>
+                        <span data-value="low">low</span>
+                        <span data-value="medium" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> medium</span>
+                        <span data-value="high" title="Raisonnement élevé, coût plus important"><span class="warning-mark" aria-hidden="true">!</span> high</span>
+                      </div>
+                    </div>
+                    <div class="hint">Docs : low/medium/high · Autres valeurs peuvent échouer</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="settings-panel__body">
-              <div class="form-row">
-                <div class="label-row">
-                  <label for="rpmLimitInput">Limite RPM</label>
-                  <span class="help" data-help>
-                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide limite RPM" aria-expanded="false">?</button>
-                    <span class="help__popup" role="tooltip">
-                      Nombre maximum de requetes par minute (global). 0 = illimit&eacute;.
-                    </span>
+
+          </div>
+        </div>
+
+        <div class="settings-panel settings-panel--performance">
+          <div class="settings-panel__header">
+            <div class="settings-panel__title">Performance</div>
+          </div>
+          <div class="settings-panel__body">
+            <div class="form-row">
+              <div class="label-row">
+                <label for="rpmLimitInput">Limite RPM</label>
+                <span class="help" data-help>
+                  <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide limite RPM" aria-expanded="false">?</button>
+                  <span class="help__popup" role="tooltip">
+                    Nombre maximum de requetes par minute (global). 0 = illimit&eacute;.
                   </span>
-                </div>
-                <input
-                  id="rpmLimitInput"
-                  class="input"
-                  type="number"
-                  min="0"
-                  max="100000"
-                  step="1"
-                  inputmode="numeric"
-                  placeholder="0"
-                />
-                <div class="hint">0 = illimit&eacute; &middot; Fen&ecirc;tre glissante de 60 secondes.</div>
+                </span>
               </div>
+              <input
+                id="rpmLimitInput"
+                class="input"
+                type="number"
+                min="0"
+                max="100000"
+                step="1"
+                inputmode="numeric"
+                placeholder="0"
+              />
+              <div class="hint">0 = illimit&eacute; &middot; Fen&ecirc;tre glissante de 60 secondes.</div>
             </div>
           </div>
+        </div>
 
-          <div class="settings-panel settings-panel--privacy">
-            <div class="settings-panel__header">
-              <div class="settings-panel__title">Confidentialité</div>
-              <div class="settings-panel__subtitle">Journal et cache persistants</div>
-            </div>
-            <div class="settings-panel__body">
-              <div class="form-row">
-                <div class="label-row">
-                  <label for="privacyModeToggle">Mode confidentialité</label>
-                  <span class="help" data-help>
-                    <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide mode confidentialité" aria-expanded="false">?</button>
-                    <span class="help__popup" role="tooltip">
-                      Désactive l'enregistrement persistant du journal et du cache · À l'activation, le cache et le journal existants sont vidés
-                    </span>
+        <div class="settings-panel settings-panel--privacy">
+          <div class="settings-panel__header">
+            <div class="settings-panel__title">Confidentialité</div>
+          </div>
+          <div class="settings-panel__body">
+            <div class="form-row">
+              <div class="label-row">
+                <label for="privacyModeToggle">Mode confidentialité</label>
+                <span class="help" data-help>
+                  <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide mode confidentialité" aria-expanded="false">?</button>
+                  <span class="help__popup" role="tooltip">
+                    Désactive l'enregistrement persistant du journal et du cache · À l'activation, le cache et le journal existants sont vidés
                   </span>
-                </div>
-                <div class="privacy-toggle">
-                  <label class="visibility-toggle">
-                    <input id="privacyModeToggle" type="checkbox" />
-                    <span class="visibility-toggle__slider"></span>
-                  </label>
-                  <span id="privacyModeStatus" class="privacy-toggle__status">Désactivé</span>
-                </div>
-                <div id="privacyModeHint" class="hint">Journal et cache persistants activés.</div>
+                </span>
               </div>
+              <div class="privacy-toggle">
+                <label class="visibility-toggle">
+                  <input id="privacyModeToggle" type="checkbox" />
+                  <span class="visibility-toggle__slider"></span>
+                </label>
+                <span id="privacyModeStatus" class="privacy-toggle__status">Désactivé</span>
+              </div>
+              <div id="privacyModeHint" class="hint">Journal et cache persistants activés.</div>
             </div>
           </div>
+        </div>
 
-          <div class="settings-panel settings-panel--status">
-            <div class="settings-panel__header">
-              <div class="settings-panel__title">Statut</div>
-            </div>
-            <div class="settings-panel__body">
-              <div class="status" aria-live="polite">
-                <div id="statusLine" class="status__line">Chargement…</div>
-                <div class="status__meta">Stockage : <span id="storageBackend">?</span></div>
-                <details class="status__details">
-                  <summary>Détails</summary>
-                  <pre id="statusDetails" class="status__pre"></pre>
-                </details>
-              </div>
+        <div class="settings-panel settings-panel--status">
+          <div class="settings-panel__header">
+            <div class="settings-panel__title">Statut</div>
+          </div>
+          <div class="settings-panel__body">
+            <div class="status" aria-live="polite">
+              <div id="statusLine" class="status__line">Chargement…</div>
+              <div class="status__meta">Stockage : <span id="storageBackend">?</span></div>
+              <details class="status__details">
+                <summary>Détails</summary>
+                <pre id="statusDetails" class="status__pre"></pre>
+              </details>
             </div>
           </div>
-
         </div>
       </div>
     </div>
