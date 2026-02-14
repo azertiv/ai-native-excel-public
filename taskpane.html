@@ -30,10 +30,10 @@
       </header>
 
       <main class="app__main">
-        <section class="card card--license is-hidden" data-collapsible data-section="onboarding" data-section-title="Mise en route">
+        <section class="card card--license is-hidden" data-collapsible data-section="onboarding" data-section-title="Activation de l'extension">
           <div class="card__header">
             <div>
-              <div class="card__title">Mise en route</div>
+              <div class="card__title">Activation de l'extension</div>
               <div class="card__subtitle">Deux étapes rapides pour activer Neurow</div>
             </div>
             <div class="card__actions">
@@ -83,17 +83,19 @@
                       <div class="setup-plan__badge">-18%</div>
                     </div>
                   </div>
-                  <div class="setup-offer__guarantee">Satisfait ou remboursé sous 14 jours</div>
-                  <div class="setup-offer__actions">
-                    <a
-                      id="licenseCheckoutLink"
-                      class="btn btn--primary"
-                      href="https://neurow.lemonsqueezy.com/checkout/buy/e132080e-77c6-4fa7-bafa-98de45abe7d8?discount=0"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      S'abonner
-                    </a>
+                  <div class="setup-offer__footer">
+                    <div class="setup-offer__guarantee">Satisfait ou remboursé sous 14 jours</div>
+                    <div class="setup-offer__actions">
+                      <a
+                        id="licenseCheckoutLink"
+                        class="btn btn--primary"
+                        href="https://neurow.lemonsqueezy.com/checkout/buy/e132080e-77c6-4fa7-bafa-98de45abe7d8?discount=0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        S'abonner
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -130,12 +132,12 @@
               <div class="setup-step__header">
                 <span class="setup-step__badge">2</span>
                 <div class="setup-step__titles">
-                  <div class="setup-step__title">Ajouter une clé API (Gemini / OpenAI)</div>
+                  <div class="setup-step__title">Ajouter une clé API</div>
                 </div>
               </div>
               <div class="setup-step__content">
                 <div class="setup-keys">
-                  <div class="setup-key-card">
+                  <div class="setup-key-card" data-onboarding-key-card="gemini">
                     <div class="setup-key-card__header">
                       <div class="setup-key-card__title">Clé API Gemini</div>
                       <div id="geminiKeyStatus" class="key-status" data-key-status="gemini">Clé manquante</div>
@@ -164,7 +166,7 @@
                     </div>
                   </div>
 
-                  <div class="setup-key-card">
+                  <div class="setup-key-card" data-onboarding-key-card="openai">
                     <div class="setup-key-card__header">
                       <div class="setup-key-card__title">Clé API OpenAI</div>
                       <div id="openaiKeyStatus" class="key-status" data-key-status="openai">Clé manquante</div>
@@ -285,9 +287,9 @@
                   </span>
                 </div>
                 <div class="range">
-                  <input id="concurrencyRange" class="range__input" type="range" min="0" max="5" step="1" value="0" />
+                  <input id="concurrencyRange" class="range__input" type="range" min="0" max="5" step="1" value="2" />
                   <div class="range__value">
-                    <span id="concurrencyValue">4</span> requetes
+                    <span id="concurrencyValue">16</span> requetes
                   </div>
                 </div>
               </div>
@@ -304,7 +306,7 @@
               <div class="card__subtitle">Suivi des tokens et estimation de coûts</div>
             </div>
             <div class="card__actions">
-              <div id="usageSummary" class="usage-summary" title="Coût estimé total">0,00€</div>
+              <div id="usageSummary" class="usage-summary" title="Coût estimé">0,00€</div>
               <button id="clearUsageTotals" class="icon-button usage-reset" type="button" title="Réinitialiser les totaux" aria-label="Réinitialiser les totaux">
                 &#8634;
               </button>
@@ -324,46 +326,43 @@
           <div id="usageBody" class="card__body">
             <div class="stats-grid">
               <div class="stat">
-                <div class="stat__label">Tokens totaux</div>
+                <div class="stat__label">Tokens</div>
                 <div id="usageTokensTotal" class="stat__value">0</div>
-                <div class="stat__meta stat__meta--stack">
-                  <div class="stat__meta-line">
-                    <span class="stat__meta-label">in</span>
-                    <span id="usageTokensInTotal">0</span>
+                <div class="stat__mini-grid">
+                  <div class="stat__mini">
+                    <span class="stat__mini-label">in</span>
+                    <span id="usageTokensInTotal" class="stat__mini-value">0</span>
                   </div>
-                  <div class="stat__meta-line">
-                    <span class="stat__meta-label">cache</span>
-                    <span id="usageTokensCacheTotal">0</span>
+                  <div class="stat__mini stat__mini--cache">
+                    <span class="stat__mini-label">cache</span>
+                    <span id="usageTokensCacheTotal" class="stat__mini-value">0</span>
                   </div>
-                  <div class="stat__meta-line">
-                    <span class="stat__meta-label">out</span>
-                    <span id="usageTokensOutTotal">0</span>
+                  <div class="stat__mini">
+                    <span class="stat__mini-label">out</span>
+                    <span id="usageTokensOutTotal" class="stat__mini-value">0</span>
                   </div>
-                  <div class="stat__meta-line">
-                    <span class="stat__meta-label">ref</span>
-                    <span id="usageTokensReasoningTotal">0</span>
+                  <div class="stat__mini stat__mini--ref">
+                    <span class="stat__mini-label">ref</span>
+                    <span id="usageTokensReasoningTotal" class="stat__mini-value">0</span>
                   </div>
                 </div>
               </div>
               <div class="stat stat--accent">
-                <div class="stat__label">Coût estimé total</div>
+                <div class="stat__label">Coût estimé</div>
                 <div id="usageCostTotal" class="stat__value">0,00€</div>
-                <div class="stat__meta">
-                  Gemini <span id="usageCostGemini">€0.0000</span> · OpenAI <span id="usageCostOpenAI">€0.0000</span>
+                <div class="stat__meta stat__meta--providers">
+                  <div class="stat__meta-line">
+                    Gemini <span id="usageCostGemini">0,00€</span>
+                  </div>
+                  <div class="stat__meta-line">
+                    OpenAI <span id="usageCostOpenAI">0,00€</span>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="breakdown">
               <div id="usageBreakdown" class="breakdown__list"></div>
-            </div>
-
-            <div class="chart">
-              <div class="chart__header">
-                <div class="chart__title">Activité sur 60 minutes</div>
-                <div class="chart__legend">Tokens (entrée + raisonnement + sortie)</div>
-              </div>
-              <canvas id="usageChart" class="chart__canvas" aria-label="Graphique d'utilisation dernière heure"></canvas>
             </div>
           </div>
         </section>
@@ -376,7 +375,7 @@
             </div>
             <div class="card__actions">
               <button id="clearLogs" class="icon-button" type="button" title="Effacer les logs" aria-label="Effacer les logs">
-                &#129529;
+                &#8634;
               </button>
               <button
                 class="collapse-toggle"
@@ -411,6 +410,12 @@
               <div class="card__subtitle">Caches actifs et réutilisables</div>
             </div>
             <div class="card__actions">
+              <span class="help" data-help>
+                <button class="icon-button help__button" type="button" aria-label="Aide cache explicite" aria-expanded="false">?</button>
+                <span class="help__popup" role="tooltip">
+                  Le cache explicite enregistre des contextes côté Gemini pour réutiliser des prompts lourds. Il est utilisé uniquement quand le fournisseur actif est Gemini.
+                </span>
+              </span>
               <button
                 class="collapse-toggle"
                 type="button"
@@ -439,12 +444,15 @@
             </div>
             <div class="card__actions">
               <span class="help" data-help>
-                <button class="icon-button icon-button--tiny help__button" type="button" aria-label="Aide cache local" aria-expanded="false">?</button>
+                <button class="icon-button help__button" type="button" aria-label="Aide cache local" aria-expanded="false">?</button>
                 <span class="help__popup" role="tooltip">
                   Stocke localement les réponses pour éviter des recalculs inutiles · Réduit la latence et le coût · Vous pouvez le vider à tout moment
                 </span>
               </span>
-              <div id="cacheStatus" class="chip chip--success chip--compact">Actif</div>
+              <span id="cacheStatus" class="status-dot status-dot--on" role="img" aria-label="Cache actif" title="Cache actif"></span>
+              <button id="clearCache" class="icon-button" type="button" title="Réinitialiser le cache local" aria-label="Réinitialiser le cache local">
+                &#8634;
+              </button>
               <button
                 class="collapse-toggle"
                 type="button"
@@ -470,9 +478,6 @@
               </div>
             </div>
 
-            <div class="actions actions--right">
-              <button id="clearCache" class="btn btn--danger" type="button">Vider le cache</button>
-            </div>
           </div>
         </section>
 
